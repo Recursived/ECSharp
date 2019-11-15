@@ -27,6 +27,13 @@ namespace ECSharp.core
             classId = GetType().Name;
         }
 
+        protected Component(Component c)
+        {
+            classId = c.classId;
+        }
+
+        public abstract Component CreateCopy();
+
         public string ClassId => this.classId;
 
     }

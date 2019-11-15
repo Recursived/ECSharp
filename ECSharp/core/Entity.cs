@@ -37,7 +37,7 @@ namespace ECSharp.core
         /// <param name="c">The component to add</param>
         public void AddComponent(Component c)
         {
-            if (components.ContainsKey(c.ClassId){
+            if (components.ContainsKey(c.ClassId)){
                 components[c.ClassId] = c;
             } else
             {
@@ -60,6 +60,17 @@ namespace ECSharp.core
             } else
             {
                 return null;
+            }
+        }
+        
+        /// <summary>
+        /// Remove every Components of the entity 
+        /// </summary>
+        public void RemoveComponents()
+        {
+            foreach (Component c in components.Values)
+            {
+                components.Remove(c.ClassId);
             }
         }
         /// <summary>
