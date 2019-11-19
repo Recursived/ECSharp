@@ -1,12 +1,10 @@
 ﻿using ECSharp.core;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ECSharp.util
 {
-    class EntityStateMachine
+    public class EntityStateMachine
     {
         // TO-DO : changer la visibilité des champs en fonction de l'utilisation
         public Dictionary<string, EntityState> states;
@@ -15,7 +13,7 @@ namespace ECSharp.util
 
         public EntityStateMachine(Entity e)
         {
-            this.states = new Dictionary<string, EntityState>();
+            states = new Dictionary<string, EntityState>();
             entity = e;
         }
 

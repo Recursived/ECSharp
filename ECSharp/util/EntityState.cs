@@ -1,12 +1,9 @@
 ﻿using ECSharp.core;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ECSharp.util
 {
-    class EntityState
+    public class EntityState
     {
         private string stateID;
         List<Component> initComponents;
@@ -34,11 +31,12 @@ namespace ECSharp.util
                     lc.Add(nc);
                 }
                 return lc;
-            } else
+            }
+            else
             {
                 return initComponents;
             }
-            
+
         }
     }
 }

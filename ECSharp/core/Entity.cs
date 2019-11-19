@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ECSharp.core
 {
@@ -10,7 +8,7 @@ namespace ECSharp.core
     /// It holds various reference of components that can be changed
     /// during the program 
     /// </summary>
-    class Entity
+    public class Entity
     {
         private static int instanceCount = 0;
         internal Dictionary<string, Component> components;
@@ -22,10 +20,10 @@ namespace ECSharp.core
             Name = name;
         }
 
-        public Entity() : this("entity_"+ instanceCount++) { }
+        public Entity() : this("entity_" + instanceCount++) { }
 
         public string Name { get => name; set => name = value; }
-        
+
 
         public Component GetComponent(string compId)
         {
@@ -35,15 +33,19 @@ namespace ECSharp.core
         /// Add a component to a dictionary of components
         /// </summary>
         /// <param name="c">The component to add</param>
-        public void AddComponent(Component c)
+        public Entity AddComponent(Component c)
         {
-            if (components.ContainsKey(c.ClassId)){
+            if (components.ContainsKey(c.ClassId))
+            {
                 components[c.ClassId] = c;
-            } else
+            }
+            else
             {
                 components.Add(c.ClassId, c);
             }
-            
+
+            return this;
+
         }
         /// <summary>
         /// Remove a component from a dictionary
@@ -57,12 +59,13 @@ namespace ECSharp.core
                 Component comp = components[c.ClassId];
                 components.Remove(c.ClassId);
                 return comp;
-            } else
+            }
+            else
             {
                 return null;
             }
         }
-        
+
         /// <summary>
         /// Remove every Components of the entity 
         /// </summary>

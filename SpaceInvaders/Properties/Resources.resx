@@ -118,4 +118,52 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="bonus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bonus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bonus2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bonus2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bunker" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\bunker.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship5.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship6" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship6.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship7" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship7.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship8" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship8.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ship9" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ship9.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shoot1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shoot1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shoot2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shoot2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shoot3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shoot3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="shoot4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\shoot4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

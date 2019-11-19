@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace ECSharp.core
 {
@@ -23,7 +22,9 @@ namespace ECSharp.core
             try
             {
                 return pool.Pop();
-            } catch (Exception e){
+            }
+            catch (Exception e)
+            {
                 return nodeType;
             }
         }
@@ -44,7 +45,7 @@ namespace ECSharp.core
             for (int i = 0; i < cacheStack.Count(); i++)
             {
                 dispose(cacheStack.Pop());
-            } 
+            }
         }
     }
 }

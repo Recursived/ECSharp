@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ECSharp.core
 {
@@ -30,9 +27,9 @@ namespace ECSharp.core
             nodeCache = new NodeCache(nodeType, components);
             nodeCache.dispose(nodeCache.get());
 
-            foreach(Component c in nodeType.getComponents())
+            foreach (Component c in nodeType.getComponents())
             {
-                components.Add(c.ClassId, c);   
+                components.Add(c.ClassId, c);
             }
         }
 
@@ -58,7 +55,8 @@ namespace ECSharp.core
 
         public void ComponentRemovedFromEntity(Entity e, string compId)
         {
-            if (components.ContainsKey(compId)){
+            if (components.ContainsKey(compId))
+            {
                 removeIfMatch(e);
             }
         }
@@ -83,14 +81,14 @@ namespace ECSharp.core
                 n.entity = e;
                 foreach (Component c in components.Values)
                 {
-                    n.setComponent(e.GetComponent(c.ClassId), c.ClassId);
+                    n.setComponent(e.GetComponent(c.ClassId));
                 }
 
                 entities[e.Name] = n;
                 nodes.AddLast(n);
 
             }
-        } 
+        }
 
         private void removeIfMatch(Entity e)
         {
@@ -102,7 +100,8 @@ namespace ECSharp.core
                 if (engine.updating)
                 {
                     nodeCache.cache(n);
-                } else
+                }
+                else
                 {
                     nodeCache.dispose(n);
                 }
@@ -111,7 +110,7 @@ namespace ECSharp.core
 
         private void releaseNodeCache()
         {
-            nodeCache.releaseCache();   
+            nodeCache.releaseCache();
         }
 
         public void Clean()

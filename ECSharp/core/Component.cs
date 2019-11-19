@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ECSharp.core
+﻿namespace ECSharp.core
 {
     /// <summary>
     /// Base for components elements.
     /// Components subclasses are just data holding classes
     /// used by entities and nodes
     /// </summary>
-    abstract class Component
+    public abstract class Component
     {
         /// <summary>
         /// string that should be unique have the name of the subclass.
@@ -23,7 +18,8 @@ namespace ECSharp.core
             this.classId = classId;
         }
 
-        protected Component() {
+        protected Component()
+        {
             classId = GetType().Name;
         }
 

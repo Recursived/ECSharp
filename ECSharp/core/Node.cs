@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ECSharp.core
 {
@@ -9,7 +6,7 @@ namespace ECSharp.core
     /// A node is a set of different of components.
     /// Nodes can be required by a system
     /// </summary>
-    abstract class Node
+    public abstract class Node
     {
 
         public Entity entity;
@@ -29,6 +26,8 @@ namespace ECSharp.core
             ClassId = GetType().Name;
         }
 
+        protected Node() : this(null) { }
+
         /// <summary>
         /// This method should return a list of the component is acting on
         /// </summary>
@@ -40,6 +39,6 @@ namespace ECSharp.core
         /// </summary>
         public abstract void disposeNode();
 
-        public abstract void setComponent(Component comp, string compId);
+        public abstract void setComponent(Component comp);
     }
 }

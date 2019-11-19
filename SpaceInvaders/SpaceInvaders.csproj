@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{D64CAEE7-4128-4D96-816C-0068C52973D1}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{F1C279BF-906D-4F04-9FDF-3146B75F945E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ECSharp</RootNamespace>
-    <AssemblyName>ECSharp</AssemblyName>
+    <RootNamespace>SpaceInvaders</RootNamespace>
+    <AssemblyName>SpaceInvaders</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -33,12 +33,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
-  <PropertyGroup>
-    <AutoGenerateBindingRedirects>false</AutoGenerateBindingRedirects>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -52,17 +46,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="core\Component.cs" />
-    <Compile Include="core\Engine.cs" />
-    <Compile Include="core\Entity.cs" />
-    <Compile Include="core\IGrouping.cs" />
-    <Compile Include="core\Node.cs" />
-    <Compile Include="core\NodeCache.cs" />
-    <Compile Include="core\NodeManager.cs" />
-    <Compile Include="core\Systeme.cs" />
+    <Compile Include="components\Display.cs" />
+    <Compile Include="components\Position.cs" />
+    <Compile Include="components\Velocity.cs" />
+    <Compile Include="EntityFactory.cs" />
+    <Compile Include="SpaceInvaderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SpaceInvaderForm.Designer.cs">
+      <DependentUpon>SpaceInvaderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Game.cs" />
+    <Compile Include="nodes\RenderNode.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="util\EntityState.cs" />
-    <Compile Include="util\EntityStateMachine.cs" />
+    <Compile Include="BalleQuiTombe.cs" />
+    <Compile Include="systems\RenderSystem.cs" />
+    <Compile Include="util\Vector2D.cs" />
+    <EmbeddedResource Include="SpaceInvaderForm.resx">
+      <DependentUpon>SpaceInvaderForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -73,6 +76,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -82,6 +86,63 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shoot2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shoot3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shoot4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bonus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bonus2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bunker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship6.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship7.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship8.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shoot1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="graphics\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ECSharp\ECSharp.csproj">
+      <Project>{d64caee7-4128-4d96-816c-0068c52973d1}</Project>
+      <Name>ECSharp</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

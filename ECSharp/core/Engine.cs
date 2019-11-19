@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace ECSharp.core
 {
-    class Engine
+    public class Engine
     {
         private LinkedList<Entity> entityList;
-        private LinkedList<System> systemList;
+        private LinkedList<Systeme> systemList;
         private Dictionary<string, Entity> entityDict;
         private Dictionary<string, IGrouping> groupings;
         public bool updating;
@@ -17,7 +15,7 @@ namespace ECSharp.core
         public Engine()
         {
             entityList = new LinkedList<Entity>();
-            systemList = new LinkedList<System>();
+            systemList = new LinkedList<Systeme>();
             entityDict = new Dictionary<string, Entity>();
             groupings = new Dictionary<string, IGrouping>();
 
@@ -64,7 +62,7 @@ namespace ECSharp.core
 
         public void RemoveAllEntities()
         {
-            foreach(Entity e in entityList)
+            foreach (Entity e in entityList)
             {
                 RemoveEntity(e);
             }
@@ -116,24 +114,24 @@ namespace ECSharp.core
             groupings.Remove(n.ClassId);
         }
 
-        public void AddSystem(System s, System.Priority p)
+        public void AddSystem(Systeme s, Systeme.Priority p)
         {
             s.priority = p;
             s.AddIntoEngine(this);
             systemList.AddLast(s);
         }
 
-        public System GetSystem(System s)
+        public Systeme GetSystem(Systeme s)
         {
             return systemList.Find(s).Value;
         }
 
-        public LinkedList<System> GetSystems()
+        public LinkedList<Systeme> GetSystems()
         {
             return systemList;
         }
 
-        public void RemoveSystem(System s)
+        public void RemoveSystem(Systeme s)
         {
             systemList.Remove(s);
             s.RemoveFromEngine(this);
@@ -141,7 +139,7 @@ namespace ECSharp.core
 
         public void RemoveAllSystems()
         {
-            foreach (System s in systemList)
+            foreach (Systeme s in systemList)
             {
                 RemoveSystem(s);
             }
@@ -151,7 +149,7 @@ namespace ECSharp.core
         public void update(int time)
         {
             updating = true;
-            foreach (System s in systemList)
+            foreach (Systeme s in systemList)
             {
                 s.update(time);
             }

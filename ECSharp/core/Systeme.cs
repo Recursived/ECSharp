@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace ECSharp.core
+﻿namespace ECSharp.core
 {
-    abstract class System
+    public abstract class Systeme
     {
-        public  enum Priority : int
+        public enum Priority : int
         {
+            None = -1;
             Update = 0,
             Move = 1,
             Collisions = 2,
@@ -18,10 +14,12 @@ namespace ECSharp.core
 
         internal Priority priority;
 
-        protected System(Priority priority)
+        protected Systeme(Priority priority)
         {
             this.priority = priority;
         }
+
+        protected Systeme() : this(Priority.None) { }
 
         public abstract void AddIntoEngine(Engine e);
 
