@@ -17,6 +17,7 @@ namespace SpaceInvaders
         public Form container;
         Size size;
         public HashSet<Keys> keyPool = new HashSet<Keys>();
+        public Graphics graphics;
 
         public Game(Form container)
         {
@@ -30,16 +31,26 @@ namespace SpaceInvaders
             factory = new EntityFactory(e);
             Size size = container.Size;
 
-            e.AddSystem(new RenderSystem(container.CreateGraphics()), Systeme.Priority.Render);
+            e.AddSystem(new RenderSystem(), Systeme.Priority.Render);
+
+            factory.CreateDisplaybleEntity(size);
+            factory.CreateBunkerEntities(size);
+
+            
+            
 
 
         }
-
-        public void Update(int time)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="time"></param>
+        /// <param name="g">Si graphics est null, on update sinon il s'agit d'un draw</param>
+        public void Update(int time, Graphics g = null)
         {
-            e.update(time);
+            e.Update(time, g);
         }
 
-        private ReleaseKey(Keys k) { keyPool.Remove(k); }
+        private void ReleaseKey(Keys k) { keyPool.Remove(k); }
     }
 }

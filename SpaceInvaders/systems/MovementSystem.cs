@@ -1,18 +1,23 @@
 ﻿using ECSharp.core;
 using SpaceInvaders.components;
 using SpaceInvaders.nodes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Text;
 
 namespace SpaceInvaders.systems
 {
-    class RenderSystem : Systeme
+    class MovementSystem : Systeme
     {
         public LinkedList<Node> lst;
-        private readonly Node n = new RenderNode();
+        private readonly Node n = new MovementNode();
+        private readonly Size size;
 
-        public RenderSystem() : base()
+        public MovementSystem(Size s) : base()
         {
+            size = s;
             n.SetUp();
         }
 
@@ -30,20 +35,18 @@ namespace SpaceInvaders.systems
         {
             foreach (Node n in lst)
             {
-                RenderNode rn = (RenderNode) n;
-                Position p = rn.pos;
-                rn.display.x = p.point.x;
-                rn.display.y = p.point.y;
-                rn.display.rotation = p.rotation;
-                if (g != null) { Draw(rn, g); }
+                MovementNode mn = (MovementNode)n;
+                Velocity v = mn.vitesse;
+                Position p = mn.pos;
+
+                // On vérifie qu'on ne sort pas de l'écran on fonction de la size
                 
+
+
+
+                
+
             }
         }
-
-        private void Draw(RenderNode rn, Graphics graphics)
-        {
-            graphics.DrawImage(rn.display.bitmap, rn.display.x, rn.display.y);
-        }
-
-}
+    }
 }

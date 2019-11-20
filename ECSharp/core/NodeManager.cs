@@ -8,24 +8,23 @@ namespace ECSharp.core
         private LinkedList<Node> nodes;
         private Dictionary<string, Node> entities;
         private Dictionary<string, Component> components;
-        private NodeCache nodeCache;
+        //private NodeCache nodeCache;
         private Node nodeType;
 
         public NodeManager(Engine engine, Node nodeType)
         {
-            Init();
-            this.engine = engine;
-            this.nodeType = nodeType;
+            Init(engine, nodeType);
         }
 
-        private void Init()
+        private void Init(Engine engine, Node nodeType)
         {
+            this.engine = engine;
+            this.nodeType = nodeType;
             nodes = new LinkedList<Node>();
             entities = new Dictionary<string, Node>();
             components = new Dictionary<string, Component>();
 
-            nodeCache = new NodeCache(nodeType, components);
-            nodeCache.dispose(nodeCache.get());
+//            nodeCache = new NodeCache(nodeType, components);
 
             foreach (Component c in nodeType.getComponents())
             {
@@ -67,7 +66,7 @@ namespace ECSharp.core
 
         private void AddIfMatch(Entity e)
         {
-            if (entities.ContainsKey(e.Name))
+            if (!entities.ContainsKey(e.Name))
             {
                 foreach (Component comp in components.Values)
                 {
@@ -77,11 +76,10 @@ namespace ECSharp.core
                     }
                 }
 
-                Node n = nodeCache.get();
-                n.entity = e;
+                Node n = nodeType.makeCopy(e);
                 foreach (Component c in components.Values)
                 {
-                    n.setComponent(e.GetComponent(c.ClassId));
+                    n.SetComponent(e.GetComponent(c.ClassId));
                 }
 
                 entities[e.Name] = n;
@@ -97,21 +95,21 @@ namespace ECSharp.core
                 Node n = entities[e.Name];
                 entities.Remove(e.Name);
                 nodes.Remove(n);
-                if (engine.updating)
+                /*if (engine.updating)
                 {
                     nodeCache.cache(n);
                 }
                 else
                 {
                     nodeCache.dispose(n);
-                }
+                }*/
             }
         }
 
-        private void releaseNodeCache()
+        /*private void releaseNodeCache()
         {
             nodeCache.releaseCache();
-        }
+        }*/
 
         public void Clean()
         {

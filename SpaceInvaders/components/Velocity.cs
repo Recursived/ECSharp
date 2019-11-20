@@ -12,7 +12,7 @@ namespace SpaceInvaders.components
         public Vector2D speedVect;
         public int damplingScalar;
 
-        public Velocity(double vx, double vy, int dampling) : base()
+        public Velocity(float vx, float vy, int dampling) : base()
         {
             speedVect = new Vector2D(vx, vy);
             damplingScalar = dampling;

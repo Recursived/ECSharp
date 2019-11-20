@@ -7,26 +7,26 @@ using System.Text;
 
 namespace SpaceInvaders.nodes
 {
-    class RenderNode : Node
+    class MovementNode : Node
     {
-        public Display display;
         public Position pos;
+        public Velocity vitesse;
 
-        public RenderNode() : base() { }
+        public MovementNode() : base() { }
 
-        public RenderNode(Entity e) : base(e) { }
+        public MovementNode(Entity e) : base(e) { }
 
         public override void DisposeNode()
         {
-            display = null;
             pos = null;
+            vitesse = null;
         }
 
         public override List<Component> getComponents()
         {
             List<Component> lst = new List<Component>
             {
-                display,
+                vitesse,
                 pos
             };
             return lst;
@@ -34,21 +34,23 @@ namespace SpaceInvaders.nodes
 
         public override Node makeCopy(Entity e)
         {
-            RenderNode rn = new RenderNode(e);
-            rn.display = this.display;
-            rn.pos = this.pos;
-            return rn;
+            MovementNode mn = new MovementNode(e);
+            mn.vitesse = this.vitesse;
+            mn.pos = this.pos;
+            return mn;
         }
 
         public override void SetComponent(Component comp)
         {
-            if (comp.ClassId == display.ClassId)
+            if (comp.ClassId == vitesse.ClassId)
             {
-                display = (Display) comp;
-            } else if (comp.ClassId == pos.ClassId)
+                vitesse = (Velocity)comp;
+            }
+            else if (comp.ClassId == pos.ClassId)
             {
-                pos = (Position) comp;
-            } else
+                pos = (Position)comp;
+            }
+            else
             {
                 throw new Exception("You passed a wrong component to the " + this.GetType().Name + " class");
             }
@@ -56,9 +58,8 @@ namespace SpaceInvaders.nodes
 
         public override void SetUp()
         {
-            display = new Display(0, 0, 0, null);
+            vitesse = new Velocity();
             pos = new Position();
-
         }
     }
 }

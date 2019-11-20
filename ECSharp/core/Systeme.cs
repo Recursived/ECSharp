@@ -1,10 +1,13 @@
-﻿namespace ECSharp.core
+﻿using System;
+using System.Drawing;
+
+namespace ECSharp.core
 {
-    public abstract class Systeme
+    public abstract class Systeme : IComparable
     {
         public enum Priority : int
         {
-            None = -1;
+            None = -1,
             Update = 0,
             Move = 1,
             Collisions = 2,
@@ -25,6 +28,11 @@
 
         public abstract void RemoveFromEngine(Engine e);
 
-        public abstract void update(int time);
+        public abstract void update(int time, Graphics g);
+
+        public int CompareTo(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

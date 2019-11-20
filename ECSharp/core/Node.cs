@@ -37,8 +37,12 @@ namespace ECSharp.core
         /// <summary>
         /// Derefence everything about the node
         /// </summary>
-        public abstract void disposeNode();
+        public abstract void DisposeNode();
 
-        public abstract void setComponent(Component comp);
+        public abstract void SetComponent(Component comp);
+
+        public abstract void SetUp();
+
+        public abstract Node makeCopy(Entity e);
     }
 }

@@ -14,37 +14,33 @@ namespace SpaceInvaders
     {
 
         private Game game;
-        public Graphics graphics;
+        
         Stopwatch watch = new Stopwatch();
         long lastTime = 0;
 
+        private Graphics g;
+        public BufferedGraphics bg;
 
 
-        public SpaceInvaderForm(Game g)
+        public SpaceInvaderForm()
         {
             InitializeComponent();
-            game = g;
+            game = new Game(this);
             watch.Start();
             WorldClock.Start();
 
         }
 
-        #region events
-        /// <summary>
-        /// Paint event of the form, see msdn for help => paint game with double buffering
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void GameForm_Paint(object sender, PaintEventArgs e)
         {
             BufferedGraphics bg = BufferedGraphicsManager.Current.Allocate(e.Graphics, e.ClipRectangle);
-            Graphics g = bg.Graphics;
+            g = bg.Graphics;
             g.Clear(Color.White);
+            game.Update(0, g);
             bg.Render();
             bg.Dispose();
 
         }
-
 
         /// <summary>
         /// Tick event => update game
@@ -76,7 +72,7 @@ namespace SpaceInvaders
 
         private void SIForm_Load(object sender, EventArgs e)
         {
-               
+            
         }
 
         private void SIForm_KeyDown(object sender, KeyEventArgs e)

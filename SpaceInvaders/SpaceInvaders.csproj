@@ -33,6 +33,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +51,7 @@
     <Compile Include="components\Position.cs" />
     <Compile Include="components\Velocity.cs" />
     <Compile Include="EntityFactory.cs" />
+    <Compile Include="nodes\MovementNode.cs" />
     <Compile Include="SpaceInvaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -60,7 +62,7 @@
     <Compile Include="nodes\RenderNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BalleQuiTombe.cs" />
+    <Compile Include="systems\MovementSystem.cs" />
     <Compile Include="systems\RenderSystem.cs" />
     <Compile Include="util\Vector2D.cs" />
     <EmbeddedResource Include="SpaceInvaderForm.resx">

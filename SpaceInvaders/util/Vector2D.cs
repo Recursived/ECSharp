@@ -16,7 +16,7 @@ namespace SpaceInvaders.util
             private set => norme = value;
         }
 
-        public Vector2D(double x, double y)
+        public Vector2D(float x, float y)
         {
             this.x = x;
             this.y = y;

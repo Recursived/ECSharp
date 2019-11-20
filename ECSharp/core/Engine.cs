@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 
 namespace ECSharp.core
 {
@@ -10,7 +11,7 @@ namespace ECSharp.core
         private Dictionary<string, Entity> entityDict;
         private Dictionary<string, IGrouping> groupings;
         public bool updating;
-        public NodeManager nodeManager;
+        private NodeManager nodeManager;
 
         public Engine()
         {
@@ -146,12 +147,12 @@ namespace ECSharp.core
             systemList.Clear();
         }
 
-        public void update(int time)
+        public void Update(int time, Graphics g)
         {
             updating = true;
             foreach (Systeme s in systemList)
             {
-                s.update(time);
+                s.update(time, g);
             }
 
             updating = false;

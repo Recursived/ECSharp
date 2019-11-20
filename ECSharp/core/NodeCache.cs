@@ -6,9 +6,9 @@ namespace ECSharp.core
 {
     class NodeCache
     {
-        private Stack<Node> pool;
+        private Stack<Node> pool = new Stack<Node>();
         private Node nodeType;
-        private Stack<Node> cacheStack;
+        private Stack<Node> cacheStack = new Stack<Node>();
         private Dictionary<string, Component> components;
 
         public NodeCache(Node nodeType, Dictionary<string, Component> components)
@@ -31,7 +31,7 @@ namespace ECSharp.core
 
         internal void dispose(Node n)
         {
-            n.disposeNode();
+            n.DisposeNode();
             pool.Push(n);
         }
 
