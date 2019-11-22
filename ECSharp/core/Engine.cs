@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Magnum.Collections;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -7,7 +8,7 @@ namespace ECSharp.core
     public class Engine
     {
         private LinkedList<Entity> entityList;
-        private LinkedList<Systeme> systemList;
+        private OrderedBag<Systeme> systemList;
         private Dictionary<string, Entity> entityDict;
         private Dictionary<string, IGrouping> groupings;
         public bool updating;
@@ -16,7 +17,7 @@ namespace ECSharp.core
         public Engine()
         {
             entityList = new LinkedList<Entity>();
-            systemList = new LinkedList<Systeme>();
+            systemList = new OrderedBag<Systeme>();
             entityDict = new Dictionary<string, Entity>();
             groupings = new Dictionary<string, IGrouping>();
 
@@ -119,15 +120,15 @@ namespace ECSharp.core
         {
             s.priority = p;
             s.AddIntoEngine(this);
-            systemList.AddLast(s);
+            systemList.Add(s);
         }
 
         public Systeme GetSystem(Systeme s)
         {
-            return systemList.Find(s).Value;
+            return systemList.FindAll(x => x.GetType().Name.Equals(s.GetType().Name)).GetEnumerator().Current;
         }
 
-        public LinkedList<Systeme> GetSystems()
+        public OrderedBag<Systeme> GetSystems()
         {
             return systemList;
         }
@@ -147,7 +148,7 @@ namespace ECSharp.core
             systemList.Clear();
         }
 
-        public void Update(int time, Graphics g)
+        public void Update(float time, Graphics g)
         {
             updating = true;
             foreach (Systeme s in systemList)

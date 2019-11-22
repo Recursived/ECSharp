@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Windows.Forms;
 using ECSharp.core;
 using SpaceInvaders.systems;
+using System.Windows.Media;
 
 namespace SpaceInvaders
 {
@@ -18,6 +19,16 @@ namespace SpaceInvaders
         Size size;
         public HashSet<Keys> keyPool = new HashSet<Keys>();
         public Graphics graphics;
+        private MediaPlayer mp = new MediaPlayer();
+        public enum State
+        {
+            Begin,
+            Play,
+            Pause,
+            Win,
+            Lost
+        }
+
 
         public Game(Form container)
         {
@@ -31,12 +42,21 @@ namespace SpaceInvaders
             factory = new EntityFactory(e);
             Size size = container.Size;
 
+            e.AddSystem(new SpaceShipControlSystem(keyPool, size), Systeme.Priority.Update);
+            e.AddSystem(new GunControlSystem(keyPool, factory), Systeme.Priority.Update);
+            e.AddSystem(new MovementSystem(size), Systeme.Priority.Move);
             e.AddSystem(new RenderSystem(), Systeme.Priority.Render);
 
-            factory.CreateDisplaybleEntity(size);
-            factory.CreateBunkerEntities(size);
 
+            // We start every system so that they can be updated
+            foreach (Systeme sys in e.GetSystems())
+            {
+                sys.Start();
+            }
+
+            Entity spaceship = factory.CreateDisplaybleEntity(size);
             
+            factory.CreateBunkerEntities(size);
             
 
 
@@ -46,7 +66,7 @@ namespace SpaceInvaders
         /// </summary>
         /// <param name="time"></param>
         /// <param name="g">Si graphics est null, on update sinon il s'agit d'un draw</param>
-        public void Update(int time, Graphics g = null)
+        public void Update(float time, Graphics g = null)
         {
             e.Update(time, g);
         }

@@ -1,6 +1,7 @@
 ﻿using ECSharp.core;
 using SpaceInvaders.components;
 using SpaceInvaders.nodes;
+using SpaceInvaders.util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -31,22 +32,23 @@ namespace SpaceInvaders.systems
             lst = null;
         }
 
-        public override void update(int time, Graphics g)
+        public override void update(float time, Graphics g)
         {
-            foreach (Node n in lst)
+            if (runnable)
             {
-                MovementNode mn = (MovementNode)n;
-                Velocity v = mn.vitesse;
-                Position p = mn.pos;
-
-                // On vérifie qu'on ne sort pas de l'écran on fonction de la size
-                
-
-
-
-                
-
+                foreach (Node n in lst)
+                {
+                    MovementNode mn = (MovementNode)n;
+                    Velocity v = mn.vitesse;
+                    Position p = mn.pos;
+                    Vector2D newv = time * v.speedVect + p.point;
+                    if (newv.x < size.Width || newv.x > 0)
+                    {
+                        p.point = newv;
+                    }
+                }
             }
+            
         }
     }
 }

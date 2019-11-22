@@ -26,18 +26,22 @@ namespace SpaceInvaders.systems
             lst = null;
         }
 
-        public override void update(int time, Graphics g)
+        public override void update(float time, Graphics g)
         {
-            foreach (Node n in lst)
+            if (runnable)
             {
-                RenderNode rn = (RenderNode) n;
-                Position p = rn.pos;
-                rn.display.x = p.point.x;
-                rn.display.y = p.point.y;
-                rn.display.rotation = p.rotation;
-                if (g != null) { Draw(rn, g); }
-                
+                foreach (Node n in lst)
+                {
+                    RenderNode rn = (RenderNode)n;
+                    Position p = rn.pos;
+                    rn.display.x = p.point.x;
+                    rn.display.y = p.point.y;
+                    rn.display.rotation = p.rotation;
+                    if (g != null) { Draw(rn, g); }
+
+                }
             }
+            
         }
 
         private void Draw(RenderNode rn, Graphics graphics)

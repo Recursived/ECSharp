@@ -35,6 +35,7 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -45,13 +46,27 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WindowsBase.4.6.1055.0\lib\WindowsBase.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="components\Bullet.cs" />
+    <Compile Include="components\Bunker.cs" />
     <Compile Include="components\Display.cs" />
+    <Compile Include="components\GameState.cs" />
+    <Compile Include="components\Gun.cs" />
+    <Compile Include="components\GunControl.cs" />
     <Compile Include="components\Position.cs" />
+    <Compile Include="components\SpaceShip.cs" />
+    <Compile Include="components\SpaceShipControl.cs" />
     <Compile Include="components\Velocity.cs" />
     <Compile Include="EntityFactory.cs" />
+    <Compile Include="nodes\BulletCollisionNode.cs" />
+    <Compile Include="nodes\GameStateNode.cs" />
+    <Compile Include="nodes\GunControlNode.cs" />
     <Compile Include="nodes\MovementNode.cs" />
+    <Compile Include="nodes\SpaceShipControlNode.cs" />
     <Compile Include="SpaceInvaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,8 +77,11 @@
     <Compile Include="nodes\RenderNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="systems\GameStateSystem.cs" />
+    <Compile Include="systems\GunControlSystem.cs" />
     <Compile Include="systems\MovementSystem.cs" />
     <Compile Include="systems\RenderSystem.cs" />
+    <Compile Include="systems\SpaceShipControlSystem.cs" />
     <Compile Include="util\Vector2D.cs" />
     <EmbeddedResource Include="SpaceInvaderForm.resx">
       <DependentUpon>SpaceInvaderForm.cs</DependentUpon>
@@ -137,14 +155,17 @@
   <ItemGroup>
     <None Include="Resources\shoot1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="graphics\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\ECSharp\ECSharp.csproj">
       <Project>{d64caee7-4128-4d96-816c-0068c52973d1}</Project>
       <Name>ECSharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\game_over.png" />
+    <Content Include="Resources\shoot.wav" />
+    <Content Include="Resources\start.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

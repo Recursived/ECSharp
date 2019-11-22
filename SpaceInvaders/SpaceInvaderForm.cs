@@ -58,7 +58,7 @@ namespace SpaceInvaders
             double deltaT = (nt - lastTime);
 
             for (; deltaT >= maxDelta; deltaT -= maxDelta)
-                game.Update((int)(maxDelta / 1000.0));
+                game.Update((float)(maxDelta / 1000.0));
 
             game.Update((int)(deltaT / 1000.0));
 
