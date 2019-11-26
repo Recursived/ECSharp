@@ -5,20 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceInvaders.nodes
+namespace SpaceInvaders.systems
 {
-    class RenderNode : Node
+    class AnimationNode : Node
     {
-        public Display display;
+        public Animation anim;
         public Position pos;
 
-        public RenderNode() : base() { }
+        public AnimationNode() : base() { }
 
-        public RenderNode(Entity e) : base(e) { }
+        public AnimationNode(Entity e) : base(e) { }
 
         public override void DisposeNode()
         {
-            display = null;
+            anim = null;
             pos = null;
         }
 
@@ -26,7 +26,7 @@ namespace SpaceInvaders.nodes
         {
             List<Component> lst = new List<Component>
             {
-                display,
+                anim,
                 pos
             };
             return lst;
@@ -34,21 +34,23 @@ namespace SpaceInvaders.nodes
 
         public override Node makeCopy(Entity e)
         {
-            RenderNode rn = new RenderNode(e);
-            rn.display = this.display;
-            rn.pos = this.pos;
-            return rn;
+            AnimationNode an = new AnimationNode(e);
+            an.pos = pos;
+            an.anim = anim;
+            return an;
         }
 
         public override void SetComponent(Component comp)
         {
-            if (comp.ClassId == display.ClassId)
+            if (comp.ClassId == anim.ClassId)
             {
-                display = (Display) comp;
-            } else if (comp.ClassId == pos.ClassId)
+                anim = (Animation)comp;
+            }
+            else if (comp.ClassId == pos.ClassId)
             {
-                pos = (Position) comp;
-            } else
+                pos = (Position)comp;
+            }
+            else
             {
                 throw new Exception("You passed a wrong component to the " + this.GetType().Name + " class");
             }
@@ -56,9 +58,8 @@ namespace SpaceInvaders.nodes
 
         public override void SetUp()
         {
-            display = new Display();
             pos = new Position();
-
+            anim = new Animation(new util.BitmapAnimation());
         }
     }
 }

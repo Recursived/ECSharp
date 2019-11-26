@@ -39,8 +39,8 @@ namespace SpaceInvaders.nodes
         {
             BulletCollisionNode bcn = new BulletCollisionNode(e);
             bcn.display = display;
-            bcn.pos = pos;
             bcn.bullet = bullet;
+            bcn.pos = pos;
             return bcn;
         }
 
@@ -50,25 +50,25 @@ namespace SpaceInvaders.nodes
             {
                 display = (Display)comp;
             }
-            else if (comp.ClassId == pos.ClassId)
-            {
-                pos = (Position)comp;
-            }
             else if (comp.ClassId == bullet.ClassId)
             {
                 bullet = (Bullet)comp;
             }
+            else if (comp.ClassId == pos.ClassId)
+            {
+                pos = (Position)comp;
+            }
             else
             {
-                throw new Exception("You passed a wrong component to the " + this.GetType().Name + " class");
+                throw new Exception("You passed a wrong component to the " + GetType().Name + " class");
             }
         }
 
         public override void SetUp()
         {
-            pos = new Position();
-            display = new Display(0, 0, 0, null);
+            display = new Display();
             bullet = new Bullet(1);
+            pos = new Position();
         }
     }
 }

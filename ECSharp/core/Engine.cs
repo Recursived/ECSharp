@@ -12,7 +12,6 @@ namespace ECSharp.core
         private Dictionary<string, Entity> entityDict;
         private Dictionary<string, IGrouping> groupings;
         public bool updating;
-        private NodeManager nodeManager;
 
         public Engine()
         {
@@ -123,9 +122,16 @@ namespace ECSharp.core
             systemList.Add(s);
         }
 
-        public Systeme GetSystem(Systeme s)
+        public Systeme GetSystem(string s)
         {
-            return systemList.FindAll(x => x.GetType().Name.Equals(s.GetType().Name)).GetEnumerator().Current;
+            foreach (Systeme sys in systemList)
+            {
+                if (sys.ClassId == s)
+                {
+                    return sys;
+                }
+            }
+            return systemList.FindAll(x => x.GetType().Name == s).GetEnumerator().Current;
         }
 
         public OrderedBag<Systeme> GetSystems()

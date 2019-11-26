@@ -16,7 +16,7 @@ namespace SpaceInvaders.systems
         private HashSet<Keys> keyPool;
         Size size;
 
-        public SpaceShipControlSystem(HashSet<Keys> keyPool, Size s)
+        public SpaceShipControlSystem(HashSet<Keys> keyPool, Size s) : base()
         {
             n.SetUp();
             this.keyPool = keyPool;
@@ -47,7 +47,6 @@ namespace SpaceInvaders.systems
                         {
                             ssn.pos.point.x -= ssn.control.v.speedVect.x * time;
                         }
-                        keyPool.Remove(ssn.control.left);
                     }
                     else if (keyPool.Contains(ssn.control.right))
                     {
@@ -56,7 +55,6 @@ namespace SpaceInvaders.systems
                         {
                             ssn.pos.point.x += ssn.control.v.speedVect.x * time;
                         }
-                        keyPool.Remove(ssn.control.right);
                     }
                 }
             }

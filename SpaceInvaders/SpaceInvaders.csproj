@@ -35,6 +35,12 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
+    <Reference Include="Magnum, Version=2.1.3.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magnum.2.1.3\lib\NET40\Magnum.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,9 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="components\Animation.cs" />
     <Compile Include="components\Bullet.cs" />
     <Compile Include="components\Bunker.cs" />
     <Compile Include="components\Display.cs" />
+    <Compile Include="components\Enemy.cs" />
+    <Compile Include="components\EnemyBlock.cs" />
     <Compile Include="components\GameState.cs" />
     <Compile Include="components\Gun.cs" />
     <Compile Include="components\GunControl.cs" />
@@ -63,10 +72,18 @@
     <Compile Include="components\Velocity.cs" />
     <Compile Include="EntityFactory.cs" />
     <Compile Include="nodes\BulletCollisionNode.cs" />
+    <Compile Include="nodes\BunkerCollisionNode.cs" />
+    <Compile Include="nodes\EnemyBlockNode.cs" />
+    <Compile Include="nodes\EnemyNode.cs" />
     <Compile Include="nodes\GameStateNode.cs" />
     <Compile Include="nodes\GunControlNode.cs" />
     <Compile Include="nodes\MovementNode.cs" />
     <Compile Include="nodes\SpaceShipControlNode.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SpaceInvaderForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,26 +94,26 @@
     <Compile Include="nodes\RenderNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="nodes\AnimationNode.cs" />
+    <Compile Include="systems\AnimationSystem.cs" />
+    <Compile Include="systems\CollisionSystem.cs" />
     <Compile Include="systems\GameStateSystem.cs" />
     <Compile Include="systems\GunControlSystem.cs" />
     <Compile Include="systems\MovementSystem.cs" />
     <Compile Include="systems\RenderSystem.cs" />
     <Compile Include="systems\SpaceShipControlSystem.cs" />
+    <Compile Include="util\BitmapAnimation.cs" />
     <Compile Include="util\Vector2D.cs" />
     <EmbeddedResource Include="SpaceInvaderForm.resx">
       <DependentUpon>SpaceInvaderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="ClassDiagram1.cd" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -163,7 +180,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\game_over.png" />
+    <None Include="Resources\pause.png" />
+    <None Include="Resources\game_over.png" />
+    <None Include="Resources\bunker_col.wav" />
     <Content Include="Resources\shoot.wav" />
     <Content Include="Resources\start.png" />
   </ItemGroup>

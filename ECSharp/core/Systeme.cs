@@ -11,19 +11,22 @@ namespace ECSharp.core
             Preupdate = 0,
             Update = 1,
             Move = 2,
-            Collisions = 3,
+            Collision = 3,
             Animate = 4,
             Render = 5
         }
 
         internal Priority priority;
         protected bool runnable;
+        private string classId;
 
+        
 
         protected Systeme(Priority priority)
         {
             this.priority = priority;
             runnable = false;
+            classId = GetType().Name;
         }
 
         protected Systeme() : this(Priority.None) { }
@@ -48,5 +51,7 @@ namespace ECSharp.core
             else
                 throw new ArgumentException("Object is not a Temperature");
         }
+
+        public string ClassId => classId;
     }
 }

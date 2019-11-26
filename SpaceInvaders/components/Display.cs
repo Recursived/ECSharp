@@ -10,21 +10,19 @@ namespace SpaceInvaders.components
     class Display : Component
     {
         public Bitmap bitmap;
-        public float x;
-        public float y;
         public int rotation;
 
-        public Display(float x, float y, int rotation, Bitmap b) : base()
+        public Display(int rotation, Bitmap b) : base()
         {
-            this.x = x;
-            this.y = y;
             this.rotation = rotation;
             bitmap = b;
         }
 
-        public Display(Bitmap b) : this(0, 0, 0, b) { }
+        public Display() : this(0, null) { }
 
-        public Display(Display d) : this(d.x, d.y, d.rotation, d.bitmap) { }
+        public Display(Bitmap b) : this(0, b) { }
+
+        public Display(Display d) : this(d.rotation, d.bitmap) { }
 
         
         public override Component CreateCopy()

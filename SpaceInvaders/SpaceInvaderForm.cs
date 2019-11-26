@@ -21,6 +21,8 @@ namespace SpaceInvaders
         private Graphics g;
         public BufferedGraphics bg;
 
+        private bool isKeyDown = false;
+
 
         public SpaceInvaderForm()
         {
@@ -77,11 +79,17 @@ namespace SpaceInvaders
 
         private void SIForm_KeyDown(object sender, KeyEventArgs e)
         {
+            if (isKeyDown && e.KeyCode == Keys.Space)
+            {
+                return;
+            }
+            isKeyDown = true;
             game.keyPool.Add(e.KeyCode);
         }
 
         private void SIForm_KeyUp(object sender, KeyEventArgs e)
         {
+            isKeyDown = false;
             game.keyPool.Remove(e.KeyCode);
         }
     }

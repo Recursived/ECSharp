@@ -77,7 +77,7 @@ namespace SpaceInvaders.nodes
             gunControl = new GunControl(Keys.Space);
             gun = new Gun(0, 0);
             pos = new Position();
-            display = new Display(0, 0, 0, null);
+            display = new Display();
         }
     }
 }

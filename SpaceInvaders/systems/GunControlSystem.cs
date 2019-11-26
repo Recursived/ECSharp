@@ -16,9 +16,9 @@ namespace SpaceInvaders.systems
         private LinkedList<Node> lst = new LinkedList<Node>();
         private HashSet<Keys> keyPool;
         private EntityFactory ef;
-        System.Media.SoundPlayer sp = new System.Media.SoundPlayer(@"C:\Users\33643\Desktop\Alex_CSHARP\SpaceInvaders\Resources\shoot.wav");
+        System.Media.SoundPlayer sp = new System.Media.SoundPlayer(Properties.Resources.shoot);
 
-        public GunControlSystem(HashSet<Keys> keyPool, EntityFactory ef)
+        public GunControlSystem(HashSet<Keys> keyPool, EntityFactory ef) : base()
         {
             n.SetUp();
             this.keyPool = keyPool;

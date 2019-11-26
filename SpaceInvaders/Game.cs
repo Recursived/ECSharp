@@ -16,10 +16,10 @@ namespace SpaceInvaders
         private Engine e;
         private EntityFactory factory;
         public Form container;
-        Size size;
+        public Size size;
         public HashSet<Keys> keyPool = new HashSet<Keys>();
         public Graphics graphics;
-        private MediaPlayer mp = new MediaPlayer();
+        //private MediaPlayer mp = new MediaPlayer();
         public enum State
         {
             Begin,
@@ -42,21 +42,18 @@ namespace SpaceInvaders
             factory = new EntityFactory(e);
             Size size = container.Size;
 
+            e.AddSystem(new GameStateSystem(e, keyPool, factory, size), Systeme.Priority.Preupdate);
             e.AddSystem(new SpaceShipControlSystem(keyPool, size), Systeme.Priority.Update);
             e.AddSystem(new GunControlSystem(keyPool, factory), Systeme.Priority.Update);
-            e.AddSystem(new MovementSystem(size), Systeme.Priority.Move);
+            e.AddSystem(new MovementSystem(size, factory), Systeme.Priority.Move);
+            e.AddSystem(new CollisionSystem(factory), Systeme.Priority.Collision);
             e.AddSystem(new RenderSystem(), Systeme.Priority.Render);
 
 
-            // We start every system so that they can be updated
-            foreach (Systeme sys in e.GetSystems())
-            {
-                sys.Start();
-            }
+            // We start the main system to start the game
+            e.GetSystem("GameStateSystem").Start();
 
-            Entity spaceship = factory.CreateDisplaybleEntity(size);
-            
-            factory.CreateBunkerEntities(size);
+            factory.CreateGameEntity();
             
 
 
@@ -71,6 +68,5 @@ namespace SpaceInvaders
             e.Update(time, g);
         }
 
-        private void ReleaseKey(Keys k) { keyPool.Remove(k); }
     }
 }

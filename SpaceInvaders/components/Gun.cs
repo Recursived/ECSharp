@@ -11,13 +11,11 @@ namespace SpaceInvaders.components
     {
         public bool shoot;
         public Vector2D shootingPoint;
-        public float timeSinceLastShot;
 
         public Gun(float x, float y) : base()
         {
             shootingPoint = new Vector2D(x,y);
             shoot = true;
-            timeSinceLastShot = 0;
         }
         public Gun(Vector2D v) : this(v.x, v.y) { }
 

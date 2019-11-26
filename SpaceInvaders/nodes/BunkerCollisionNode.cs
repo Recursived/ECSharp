@@ -4,60 +4,58 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;
 
 namespace SpaceInvaders.nodes
 {
-    class SpaceShipControlNode : Node
+    class BunkerCollisionNode : Node
     {
+        public Bunker bunker;
         public Position pos;
-        public SpaceShipControl control;
         public Display display;
 
-        public SpaceShipControlNode() : base() { }
+        public BunkerCollisionNode() : base() { }
 
-        public SpaceShipControlNode(Entity e) : base(e) { }
-
+        public BunkerCollisionNode(Entity e) : base(e) { } 
         public override void DisposeNode()
         {
-            pos = null;
-            control = null;
+            bunker = null;
             display = null;
+            pos = null;
         }
 
         public override List<Component> getComponents()
         {
             List<Component> lst = new List<Component>
             {
+                display,
                 pos,
-                control,
-                display
+                bunker
             };
             return lst;
         }
 
         public override Node makeCopy(Entity e)
         {
-            SpaceShipControlNode ssn = new SpaceShipControlNode(e);
-            ssn.pos = pos;
-            ssn.control = control;
-            ssn.display = display;
-            return ssn;
+            BunkerCollisionNode bn = new BunkerCollisionNode(e);
+            bn.display = display;
+            bn.bunker = bunker;
+            bn.pos = pos;
+            return bn;
         }
 
         public override void SetComponent(Component comp)
         {
-            if (comp.ClassId == pos.ClassId)
-            {
-                pos = (Position)comp;
-            }
-            else if (comp.ClassId == control.ClassId)
-            {
-                control = (SpaceShipControl)comp;
-            }
-            else if (comp.ClassId == display.ClassId)
+            if (comp.ClassId == display.ClassId)
             {
                 display = (Display)comp;
+            }
+            else if (comp.ClassId == bunker.ClassId)
+            {
+                bunker = (Bunker)comp;
+            }
+            else if (comp.ClassId == pos.ClassId)
+            {
+                pos = (Position)comp;
             }
             else
             {
@@ -67,9 +65,9 @@ namespace SpaceInvaders.nodes
 
         public override void SetUp()
         {
-            pos = new Position();
-            control = new SpaceShipControl(Keys.Left, Keys.Right, new Velocity(50, 0, 0));
+            bunker = new Bunker();
             display = new Display();
+            pos = new Position();
         }
     }
 }

@@ -21,6 +21,19 @@ namespace SpaceInvaders
             this.e = e;
         }
 
+        public void removeEntity(Entity entity)
+        {
+            e.RemoveEntity(entity);
+        }
+
+        public Entity CreateGameEntity()
+        {
+            Entity entity = new Entity();
+            entity.AddComponent(new GameState(3));
+            e.AddEntity(entity);
+            return entity;
+        }
+
         public Entity CreateDisplaybleEntity(Size s)
         {
             Entity entity = new Entity();
@@ -29,7 +42,7 @@ namespace SpaceInvaders
                 .AddComponent(new Display(Properties.Resources.ship3))
                 .AddComponent(new Gun(p.point))
                 .AddComponent(new GunControl(Keys.Space))
-                .AddComponent(new SpaceShipControl(Keys.Left, Keys.Right, new Velocity(500, 0, 0)));
+                .AddComponent(new SpaceShipControl(Keys.Left, Keys.Right, new Velocity(300, 0, 0)));
             e.AddEntity(entity);
             return entity;
         }
@@ -87,7 +100,7 @@ namespace SpaceInvaders
 
         private int CountPixels(Bitmap bm, Color target_color)
         {
-            // Loop through the pixels.
+            
             int matches = 0;
             for (int y = 0; y < bm.Height; y++)
             {
