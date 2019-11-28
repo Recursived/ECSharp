@@ -7,22 +7,20 @@ using System.Text;
 
 namespace SpaceInvaders.nodes
 {
-    class EnemyNode : Node
+    class SpaceShipCollisionNode : Node
     {
         public Position pos;
-        public Enemy enemy;
-        public Gun gun;
+        public SpaceShip spaceship;
         public Display display;
 
-        public EnemyNode() : base() { }
+        public SpaceShipCollisionNode() : base() { }
 
-        public EnemyNode(Entity e) : base(e) { }
+        public SpaceShipCollisionNode(Entity e) : base(e) { }
 
         public override void DisposeNode()
         {
             pos = null;
-            enemy = null;
-            gun = null;
+            spaceship = null;
             display = null;
         }
 
@@ -31,8 +29,7 @@ namespace SpaceInvaders.nodes
             List<Component> lst = new List<Component>
             {
                 pos,
-                enemy,
-                gun,
+                spaceship,
                 display
             };
             return lst;
@@ -40,12 +37,11 @@ namespace SpaceInvaders.nodes
 
         public override Node makeCopy(Entity e)
         {
-            EnemyNode en = new EnemyNode(e);
-            en.pos = pos;
-            en.enemy = enemy;
-            en.gun = gun;
-            en.display = display;
-            return en;
+            SpaceShipCollisionNode scn = new SpaceShipCollisionNode(e);
+            scn.pos = pos;
+            scn.spaceship = spaceship;
+            scn.display = display;
+            return scn;
         }
 
         public override void SetComponent(Component comp)
@@ -54,13 +50,9 @@ namespace SpaceInvaders.nodes
             {
                 pos = (Position)comp;
             }
-            else if (comp.ClassId == gun.ClassId)
+            else if (comp.ClassId == spaceship.ClassId)
             {
-                gun = (Gun)comp;
-            }
-            else if (comp.ClassId == enemy.ClassId)
-            {
-                enemy = (Enemy)comp;
+                spaceship = (SpaceShip)comp;
             }
             else if (comp.ClassId == display.ClassId)
             {
@@ -74,9 +66,8 @@ namespace SpaceInvaders.nodes
 
         public override void SetUp()
         {
+            spaceship = new SpaceShip();
             pos = new Position();
-            gun = new Gun(0, 0);
-            enemy = new Enemy(1, Enemy.Type.Medium, 0, 0);
             display = new Display();
 
         }

@@ -58,6 +58,71 @@ namespace SpaceInvaders
             return entity;
         }
 
+        /*public Entity CreateEnemyBullet(Gun g, Enemy.Type t)
+        {
+            Entity entity = new Entity();
+            entity.AddComponent(new Bullet(1))
+                .AddComponent(new Position(g.shootingPoint, 0))
+                .AddComponent(new Velocity(0, 300, 0))
+                .AddComponent(new Display(Properties.Resources.shoot1));
+            e.AddEntity(entity);
+            return entity;
+        }*/
+
+
+        public Entity CreateBonus(Position p, Bonus.Type type)
+        {
+            Entity entity = new Entity();
+            entity.AddComponent(new Bonus(type))
+                .AddComponent(new Position(p))
+                .AddComponent(new Velocity(0, 300, 0))
+                .AddComponent(new Display(Properties.Resources.bonus));
+            e.AddEntity(entity);
+            return entity;
+        }
+        public List<Entity> CreateEnemyEntities(Size s)
+        {
+            List<Entity> entities = new List<Entity>();
+            Bitmap[] arr_bitmap = 
+            {
+                Properties.Resources.ship1,
+                Properties.Resources.ship2,
+                Properties.Resources.ship6,
+                Properties.Resources.ship5,
+                Properties.Resources.ship5,
+                Properties.Resources.ship5,
+            };
+            Enemy.Type[] arr_type =
+            {
+                Enemy.Type.Big,
+                Enemy.Type.Big,
+                Enemy.Type.Medium,
+                Enemy.Type.Small,
+                Enemy.Type.Small,
+                Enemy.Type.Small,
+            };
+
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Entity ent = new Entity();
+                    Position p = new Position((s.Width / 20) * (2*j), (s.Height / 17) * i);
+                    ent.AddComponent(new Display(arr_bitmap[i]))
+                        .AddComponent(p)
+                        .AddComponent(new Gun(p.point))
+                        .AddComponent(new Enemy(1, arr_type[i], s.Width / 14, s.Height / 15));
+                    entities.Add(ent);
+                    e.AddEntity(ent);
+                }
+            }
+            Entity eb = new Entity();
+            eb.AddComponent(new EnemyBlock(0, 0, (s.Width / 20) * 6, (s.Height / 17) * 7));
+            entities.Add(eb);
+            e.AddEntity(eb);
+            return entities;
+        }
+
         public List<Entity> CreateBunkerEntities(Size s)
         {
             List<Entity> bunkers = new List<Entity>();

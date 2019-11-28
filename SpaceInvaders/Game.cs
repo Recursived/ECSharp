@@ -19,6 +19,7 @@ namespace SpaceInvaders
         public Size size;
         public HashSet<Keys> keyPool = new HashSet<Keys>();
         public Graphics graphics;
+        public static Random rand = new Random();
         //private MediaPlayer mp = new MediaPlayer();
         public enum State
         {
@@ -46,7 +47,7 @@ namespace SpaceInvaders
             e.AddSystem(new SpaceShipControlSystem(keyPool, size), Systeme.Priority.Update);
             e.AddSystem(new GunControlSystem(keyPool, factory), Systeme.Priority.Update);
             e.AddSystem(new MovementSystem(size, factory), Systeme.Priority.Move);
-            e.AddSystem(new CollisionSystem(factory), Systeme.Priority.Collision);
+            e.AddSystem(new CollisionSystem(factory, size), Systeme.Priority.Collision);
             e.AddSystem(new RenderSystem(), Systeme.Priority.Render);
 
 

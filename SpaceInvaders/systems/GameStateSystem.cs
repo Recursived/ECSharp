@@ -60,6 +60,7 @@ namespace SpaceInvaders.systems
                             // We launch every system
                             ef.CreateDisplaybleEntity(size);
                             ef.CreateBunkerEntities(size);
+                            ef.CreateEnemyEntities(size);
                             foreach (Systeme sys in engine.GetSystems())
                             {
                                 sys.Start();

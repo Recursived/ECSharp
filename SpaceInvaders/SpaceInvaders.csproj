@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="components\Animation.cs" />
+    <Compile Include="components\Bonus.cs" />
     <Compile Include="components\Bullet.cs" />
     <Compile Include="components\Bunker.cs" />
     <Compile Include="components\Display.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="components\SpaceShipControl.cs" />
     <Compile Include="components\Velocity.cs" />
     <Compile Include="EntityFactory.cs" />
+    <Compile Include="nodes\BonusCollisionNode.cs" />
     <Compile Include="nodes\BulletCollisionNode.cs" />
     <Compile Include="nodes\BunkerCollisionNode.cs" />
     <Compile Include="nodes\EnemyBlockNode.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="nodes\GameStateNode.cs" />
     <Compile Include="nodes\GunControlNode.cs" />
     <Compile Include="nodes\MovementNode.cs" />
+    <Compile Include="nodes\SpaceShipCollisionNode.cs" />
     <Compile Include="nodes\SpaceShipControlNode.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -97,6 +100,7 @@
     <Compile Include="nodes\AnimationNode.cs" />
     <Compile Include="systems\AnimationSystem.cs" />
     <Compile Include="systems\CollisionSystem.cs" />
+    <Compile Include="systems\EnemyManagementSystem.cs" />
     <Compile Include="systems\GameStateSystem.cs" />
     <Compile Include="systems\GunControlSystem.cs" />
     <Compile Include="systems\MovementSystem.cs" />

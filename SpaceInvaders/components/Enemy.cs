@@ -1,5 +1,6 @@
 ﻿using ECSharp.core;
 using ECSharp.util;
+using SpaceInvaders.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,6 @@ namespace SpaceInvaders.components
     class Enemy : Component
     {
         public int life;
-        public EntityStateMachine esm;
         public enum Type
         {
             Small,
@@ -19,17 +19,20 @@ namespace SpaceInvaders.components
         }
 
         public Type type;
+        public Vector2D vitesse;
 
-        public Enemy(int life, Type type, EntityStateMachine esm) : base()
+        public Enemy(int life, Type type, float vx, float vy) : base()
         {
             this.life = life;
             this.type = type;
-            this.esm = esm;
+
         }
 
-        public Enemy(Type type, EntityStateMachine esm) : this(0, type, esm) { }
+        public Enemy(int life, Type type, Vector2D v) : this(life, type, v.x, v.y) { }
 
-        public Enemy(Enemy e) : this(e.life, e.type, e.esm) { }
+        public Enemy(Type type) : this(0, type, 0, 0) { }
+
+        public Enemy(Enemy e) : this(e.life, e.type, 0, 0) { }
 
         public override Component CreateCopy()
         {

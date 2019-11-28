@@ -7,22 +7,16 @@ using System.Text;
 
 namespace SpaceInvaders.nodes
 {
-    class EnemyNode : Node
+    class BonusCollisionNode : Node
     {
+        public Bonus bonus;
         public Position pos;
-        public Enemy enemy;
-        public Gun gun;
         public Display display;
-
-        public EnemyNode() : base() { }
-
-        public EnemyNode(Entity e) : base(e) { }
-
+        
         public override void DisposeNode()
         {
+            bonus = null;
             pos = null;
-            enemy = null;
-            gun = null;
             display = null;
         }
 
@@ -30,9 +24,8 @@ namespace SpaceInvaders.nodes
         {
             List<Component> lst = new List<Component>
             {
+                bonus,
                 pos,
-                enemy,
-                gun,
                 display
             };
             return lst;
@@ -40,31 +33,26 @@ namespace SpaceInvaders.nodes
 
         public override Node makeCopy(Entity e)
         {
-            EnemyNode en = new EnemyNode(e);
-            en.pos = pos;
-            en.enemy = enemy;
-            en.gun = gun;
-            en.display = display;
-            return en;
+            BonusCollisionNode bcn = new BonusCollisionNode();
+            bcn.bonus = bonus;
+            bcn.pos = pos;
+            bcn.display = display;
+            return bcn;
         }
 
         public override void SetComponent(Component comp)
         {
-            if (comp.ClassId == pos.ClassId)
-            {
-                pos = (Position)comp;
-            }
-            else if (comp.ClassId == gun.ClassId)
-            {
-                gun = (Gun)comp;
-            }
-            else if (comp.ClassId == enemy.ClassId)
-            {
-                enemy = (Enemy)comp;
-            }
-            else if (comp.ClassId == display.ClassId)
+            if (comp.ClassId == display.ClassId)
             {
                 display = (Display)comp;
+            }
+            else if (comp.ClassId == bonus.ClassId)
+            {
+                bonus = (Bonus)comp;
+            }
+            else if (comp.ClassId == pos.ClassId)
+            {
+                pos = (Position)comp;
             }
             else
             {
@@ -74,11 +62,9 @@ namespace SpaceInvaders.nodes
 
         public override void SetUp()
         {
+            bonus = new Bonus();
             pos = new Position();
-            gun = new Gun(0, 0);
-            enemy = new Enemy(1, Enemy.Type.Medium, 0, 0);
             display = new Display();
-
         }
     }
 }
