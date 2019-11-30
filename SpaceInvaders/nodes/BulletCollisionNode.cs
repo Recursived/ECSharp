@@ -67,7 +67,7 @@ namespace SpaceInvaders.nodes
         public override void SetUp()
         {
             display = new Display();
-            bullet = new Bullet(1);
+            bullet = new Bullet(1, true);
             pos = new Position();
         }
     }

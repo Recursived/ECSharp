@@ -13,18 +13,21 @@ namespace SpaceInvaders.components
             RestoreBunker,
             PlusLife,
             ScoreBoost,
+            EnemySlow,
+            doubleShoot,
+            controlledBullet
 
 
-        }
+        } 
 
-        public Bonus.Type type;
+        public Type type;
 
         public Bonus(Type type) : base()
         {
             this.type = type;
         }
 
-        public Bonus() : this(Bonus.Type.PlusLife) { }
+        public Bonus() : this(Type.PlusLife) { }
 
         public Bonus(Bonus b) : this(b.type) { }
 

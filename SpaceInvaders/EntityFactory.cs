@@ -26,15 +26,20 @@ namespace SpaceInvaders
             e.RemoveEntity(entity);
         }
 
+        public LinkedList<Entity> GetEntities()
+        {
+            return e.GetEntities();
+        }
+
         public Entity CreateGameEntity()
         {
-            Entity entity = new Entity();
+            Entity entity = new Entity("game");
             entity.AddComponent(new GameState(3));
             e.AddEntity(entity);
             return entity;
         }
 
-        public Entity CreateDisplaybleEntity(Size s)
+        public Entity CreateDisplaybleEntity(Size s, int life)
         {
             Entity entity = new Entity();
             Position p = new Position((s.Width / 7) * 3, (int)(s.Height * 0.85));
@@ -42,32 +47,63 @@ namespace SpaceInvaders
                 .AddComponent(new Display(Properties.Resources.ship3))
                 .AddComponent(new Gun(p.point))
                 .AddComponent(new GunControl(Keys.Space))
-                .AddComponent(new SpaceShipControl(Keys.Left, Keys.Right, new Velocity(300, 0, 0)));
+                .AddComponent(new SpaceShipControl(Keys.Left, Keys.Right, new Velocity(300, 0, 0)))
+                .AddComponent(new SpaceShip(life));
             e.AddEntity(entity);
             return entity;
         }
 
-        public Entity CreateSpaceShipBullet(Gun g)
+        public List<Entity> CreateSpaceShipBullet(Gun g)
         {
-            Entity entity = new Entity();
-            entity.AddComponent(new Bullet(1))
-                .AddComponent(new Position(g.shootingPoint, 0))
-                .AddComponent(new Velocity(0, -300, 0))
-                .AddComponent(new Display(Properties.Resources.shoot1));
-            e.AddEntity(entity);
-            return entity;
+            List<Entity> lst = new List<Entity>();
+            if (g.doubleShoot)
+            {
+                Entity b1 = new Entity();
+                Entity b2 = new Entity();
+                b1.AddComponent(new Bullet(1, true, g.controllableShoot))
+                    .AddComponent(new Position(g.shootingPoint - new Vector2D(10, 0), 0))
+                    .AddComponent(new Velocity(0, -300, 0))
+                    .AddComponent(new Display(Properties.Resources.shoot1));
+                e.AddEntity(b1);
+                lst.Add(b1);
+
+                b2.AddComponent(new Bullet(1, true, g.controllableShoot))
+                    .AddComponent(new Position(g.shootingPoint + new Vector2D(10, 0), 0))
+                    .AddComponent(new Velocity(0, -300, 0))
+                    .AddComponent(new Display(Properties.Resources.shoot1));
+                e.AddEntity(b2);
+                lst.Add(b2);
+
+            } else
+            {
+                Entity entity = new Entity();
+                entity.AddComponent(new Bullet(1, true, g.controllableShoot))
+                    .AddComponent(new Position(g.shootingPoint, 0))
+                    .AddComponent(new Velocity(0, -300, 0))
+                    .AddComponent(new Display(Properties.Resources.shoot1));
+                e.AddEntity(entity);
+                lst.Add(entity);
+            }
+            
+            if (g.controllableShoot)
+            {
+                g.controllableShoot = false; // we reset bonus when shot
+            }
+
+            return lst;
         }
 
-        /*public Entity CreateEnemyBullet(Gun g, Enemy.Type t)
+        public Entity CreateEnemyBullet(Gun g, Bitmap b, int damage)
         {
+
             Entity entity = new Entity();
-            entity.AddComponent(new Bullet(1))
+            entity.AddComponent(new Bullet(damage, false))
                 .AddComponent(new Position(g.shootingPoint, 0))
                 .AddComponent(new Velocity(0, 300, 0))
-                .AddComponent(new Display(Properties.Resources.shoot1));
+                .AddComponent(new Display(b));
             e.AddEntity(entity);
             return entity;
-        }*/
+        }
 
 
         public Entity CreateBonus(Position p, Bonus.Type type)
@@ -80,7 +116,7 @@ namespace SpaceInvaders
             e.AddEntity(entity);
             return entity;
         }
-        public List<Entity> CreateEnemyEntities(Size s)
+        public List<Entity> CreateEnemyEntities(Size s, GameState gs)
         {
             List<Entity> entities = new List<Entity>();
             Bitmap[] arr_bitmap = 
@@ -102,24 +138,47 @@ namespace SpaceInvaders
                 Enemy.Type.Small,
             };
 
+            int max_x = 0;
+            int max_y = 0;
             for (int i = 0; i < 6; i++)
             {
                 for (int j = 0; j < 7; j++)
                 {
                     Entity ent = new Entity();
                     Position p = new Position((s.Width / 20) * (2*j), (s.Height / 17) * i);
+                    // We check the furthest x and y pos for the enemy block
+                    if (max_x < p.point.x + arr_bitmap[i].Width)
+                    {
+                        max_x = (int)p.point.x + arr_bitmap[i].Width;
+                    }
+
+                    if (max_y < p.point.y + arr_bitmap[i].Height)
+                    {
+                        max_y = (int)p.point.y + arr_bitmap[i].Height;
+                    }
+
                     ent.AddComponent(new Display(arr_bitmap[i]))
                         .AddComponent(p)
                         .AddComponent(new Gun(p.point))
-                        .AddComponent(new Enemy(1, arr_type[i], s.Width / 14, s.Height / 15));
+                        .AddComponent(new Enemy(1, arr_type[i], s.Width / 25, 1000));
                     entities.Add(ent);
                     e.AddEntity(ent);
+                    gs.enemiesCount++;
                 }
             }
+
             Entity eb = new Entity();
-            eb.AddComponent(new EnemyBlock(0, 0, (s.Width / 20) * 6, (s.Height / 17) * 7));
+            eb.AddComponent(
+                new EnemyBlock(
+                    0,
+                    0,
+                    max_x,
+                    max_y
+                    )
+            );
             entities.Add(eb);
             e.AddEntity(eb);
+
             return entities;
         }
 

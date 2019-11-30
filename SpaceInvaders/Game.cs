@@ -19,7 +19,11 @@ namespace SpaceInvaders
         public Size size;
         public HashSet<Keys> keyPool = new HashSet<Keys>();
         public Graphics graphics;
+
         public static Random rand = new Random();
+        // graphics fields
+        public static System.Drawing.Brush blackBrush = new SolidBrush(System.Drawing.Color.Black);
+        public static Font font = new Font("Times New Roman", 14, FontStyle.Bold, GraphicsUnit.Pixel);
         //private MediaPlayer mp = new MediaPlayer();
         public enum State
         {

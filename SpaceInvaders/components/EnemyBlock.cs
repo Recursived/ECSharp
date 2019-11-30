@@ -17,12 +17,16 @@ namespace SpaceInvaders.components
             Right
         }
         public Direction direction;
+        public bool collided;
+        public int shootProbability;
 
         public EnemyBlock(float p1x, float p1y, float p2x, float p2y) : base()
         {
             upperLeft = new Vector2D(p1x, p1y);
             bottomRight = new Vector2D(p2x, p2y);
             direction = Direction.Right;
+            collided = false;
+            shootProbability = 1000;
         }
 
         public EnemyBlock(Vector2D v1, Vector2D v2) : this(v1.x, v1.y, v2.x, v2.y) { }

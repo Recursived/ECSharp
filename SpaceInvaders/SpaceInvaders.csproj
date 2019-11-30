@@ -74,6 +74,7 @@
     <Compile Include="EntityFactory.cs" />
     <Compile Include="nodes\BonusCollisionNode.cs" />
     <Compile Include="nodes\BulletCollisionNode.cs" />
+    <Compile Include="nodes\BulletControlNode.cs" />
     <Compile Include="nodes\BunkerCollisionNode.cs" />
     <Compile Include="nodes\EnemyBlockNode.cs" />
     <Compile Include="nodes\EnemyNode.cs" />
@@ -100,7 +101,6 @@
     <Compile Include="nodes\AnimationNode.cs" />
     <Compile Include="systems\AnimationSystem.cs" />
     <Compile Include="systems\CollisionSystem.cs" />
-    <Compile Include="systems\EnemyManagementSystem.cs" />
     <Compile Include="systems\GameStateSystem.cs" />
     <Compile Include="systems\GunControlSystem.cs" />
     <Compile Include="systems\MovementSystem.cs" />
@@ -184,9 +184,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\you_win.png" />
     <None Include="Resources\pause.png" />
     <None Include="Resources\game_over.png" />
     <None Include="Resources\bunker_col.wav" />
+    <None Include="Resources\bonus_sound.wav" />
     <Content Include="Resources\shoot.wav" />
     <Content Include="Resources\start.png" />
   </ItemGroup>

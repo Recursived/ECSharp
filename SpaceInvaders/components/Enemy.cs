@@ -1,5 +1,4 @@
 ﻿using ECSharp.core;
-using ECSharp.util;
 using SpaceInvaders.util;
 using System;
 using System.Collections.Generic;
@@ -25,6 +24,7 @@ namespace SpaceInvaders.components
         {
             this.life = life;
             this.type = type;
+            this.vitesse = new Vector2D(vx, vy);
 
         }
 

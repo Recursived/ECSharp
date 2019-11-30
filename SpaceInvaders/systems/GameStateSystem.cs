@@ -18,9 +18,7 @@ namespace SpaceInvaders.systems
         private readonly Node n = new GameStateNode();
         private LinkedList<Node> lst;
 
-        // graphics fields
-        private Brush blackBrush = new SolidBrush(Color.Black);
-        private Font font = new Font("Times New Roman", 14, FontStyle.Bold, GraphicsUnit.Pixel);
+        
 
         public GameStateSystem(Engine engine, HashSet<Keys> keyPool, EntityFactory ef, Size size) : base()
         {
@@ -58,9 +56,9 @@ namespace SpaceInvaders.systems
                         if (keyPool.Contains(Keys.S))
                         {
                             // We launch every system
-                            ef.CreateDisplaybleEntity(size);
+                            ef.CreateDisplaybleEntity(size, gsn.gs.lives);
                             ef.CreateBunkerEntities(size);
-                            ef.CreateEnemyEntities(size);
+                            ef.CreateEnemyEntities(size, gsn.gs);
                             foreach (Systeme sys in engine.GetSystems())
                             {
                                 sys.Start();
@@ -72,7 +70,6 @@ namespace SpaceInvaders.systems
                     case Game.State.Pause:
                         if (g != null)
                         {
-                            g.Flush();
                             g.DrawImage(Properties.Resources.pause, size.Width / 4, size.Height / 4);
                         }
 
@@ -105,30 +102,97 @@ namespace SpaceInvaders.systems
                         if (g != null)
                         {
                             g.DrawString("Nombre de vie : " + gsn.gs.lives + " / Points : " + gsn.gs.score + " / Level : " + gsn.gs.level,
-                                font,
-                                blackBrush,
+                                Game.font,
+                                Game.blackBrush,
                                 10,
                                 size.Height - 50
                                 );
 
                         }
 
-                        if (gsn.gs.lives == 0)
+                        if (gsn.gs.lives <= 0)
                         {
                             gsn.gs.state = Game.State.Lost;
+                        } else if (gsn.gs.enemiesCount == 0)
+                        {
+                            gsn.gs.state = Game.State.Win;
                         }
                         break;
                     case Game.State.Win:
-                        gsn.gs.level++; // On passe au level suivant
+                        foreach (Systeme sys in engine.GetSystems())
+                        {
+                            if (sys.ClassId != "GameStateSystem")
+                            {
+                                sys.Stop();
+                            }
+                        }
+
+                        if (g != null)
+                        {
+                            g.DrawImage(Properties.Resources.you_win, size.Width / 3, size.Height / 3);
+                            g.DrawString("Press 'n' to go to the next level",
+                                Game.font,
+                                Game.blackBrush,
+                                size.Width/2,
+                                size.Height - 50
+                                );
+                        }
+
+                        if (keyPool.Contains(Keys.N))
+                        {
+                            gsn.gs.level++; // next level
+                            keyPool.Remove(Keys.N);
+                            foreach (Entity ent in ef.GetEntities().ToList())
+                            {
+                                if (ent.Name != "game")
+                                {
+                                    ef.removeEntity(ent);
+                                }
+                            }
+                            gsn.gs.state = Game.State.Begin;
+                        }
                         break;
                     case Game.State.Lost:
-                        gsn.gs.level = 0;
-                        gsn.gs.score = 0;
-                        break;
+                        
+                        if (g != null)
+                        {
+                            g.DrawImage(Properties.Resources.game_over, size.Width / 4, size.Height / 4);
+                            g.DrawString("Press 'r' to restart",
+                                Game.font,
+                                Game.blackBrush,
+                                size.Width / 2,
+                                size.Height - 50
+                                );
+                        }
 
+                        foreach (Systeme sys in engine.GetSystems())
+                        {
+                            if (sys.ClassId != "GameStateSystem")
+                            {
+                                sys.Stop();
+                            }
+                        }
+
+                        if (keyPool.Contains(Keys.R))
+                        {
+                            gsn.gs.level = 1;
+                            gsn.gs.score = 0;
+                            gsn.gs.lives = 3;
+                            keyPool.Remove(Keys.R);
+                            foreach (Entity ent in ef.GetEntities().ToList())
+                            {
+
+                                if (ent.Name != "game")
+                                {
+                                    ef.removeEntity(ent);
+                                }
+                            }
+                            gsn.gs.state = Game.State.Begin;
+                        }
+                        
+                        break;
+                    }
                 }
-            }
-            
-        }
+            }          
     }
 }

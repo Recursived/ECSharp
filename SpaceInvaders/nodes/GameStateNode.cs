@@ -10,6 +10,11 @@ namespace SpaceInvaders.nodes
     class GameStateNode : Node
     {
         public GameState gs;
+
+        public GameStateNode() : base() { }
+        public GameStateNode(Entity e) : base(e) { }
+
+        
         public override void DisposeNode()
         {
             gs = null;

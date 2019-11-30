@@ -7,52 +7,52 @@ using System.Text;
 
 namespace SpaceInvaders.nodes
 {
-    class BonusCollisionNode : Node
+    class BulletControlNode : Node
     {
-        public Bonus bonus;
+        public Bullet bullet;
+        public Velocity vitesse;
         public Position pos;
-        public Display display;
 
-        public BonusCollisionNode() : base() { }
+        public BulletControlNode() : base() { }
 
-        public BonusCollisionNode(Entity e) : base(e) { }
+        public BulletControlNode(Entity e) : base(e) { }
 
         public override void DisposeNode()
         {
-            bonus = null;
+            bullet = null;
+            vitesse = null;
             pos = null;
-            display = null;
         }
 
         public override List<Component> getComponents()
         {
             List<Component> lst = new List<Component>
             {
-                bonus,
-                pos,
-                display
+                bullet,
+                vitesse, 
+                pos
             };
             return lst;
         }
 
         public override Node makeCopy(Entity e)
         {
-            BonusCollisionNode bcn = new BonusCollisionNode(e);
-            bcn.bonus = bonus;
+            BulletControlNode bcn = new BulletControlNode(e);
+            bcn.vitesse = vitesse;
+            bcn.bullet = bullet;
             bcn.pos = pos;
-            bcn.display = display;
             return bcn;
         }
 
         public override void SetComponent(Component comp)
         {
-            if (comp.ClassId == display.ClassId)
+            if (comp.ClassId == vitesse.ClassId)
             {
-                display = (Display)comp;
+                vitesse = (Velocity)comp;
             }
-            else if (comp.ClassId == bonus.ClassId)
+            else if (comp.ClassId == bullet.ClassId)
             {
-                bonus = (Bonus)comp;
+                bullet = (Bullet)comp;
             }
             else if (comp.ClassId == pos.ClassId)
             {
@@ -66,9 +66,9 @@ namespace SpaceInvaders.nodes
 
         public override void SetUp()
         {
-            bonus = new Bonus();
+            bullet = new Bullet(1, true);
+            vitesse = new Velocity();
             pos = new Position();
-            display = new Display();
         }
     }
 }

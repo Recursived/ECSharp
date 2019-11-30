@@ -13,12 +13,14 @@ namespace SpaceInvaders.components
         public int score;
         public int lives;
         public int level;
+        public int enemiesCount;
 
         public GameState(int lives) : base()
         {
             this.lives = lives;
             score = 0;
-            level = 0;
+            enemiesCount = 0;
+            level = 1;
             state = State.Begin;
         }
 
