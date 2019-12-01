@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ECSharp.core.Component" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAgAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>core\Component.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ECSharp.core.Engine" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQgEoCABQAgAAIBAAAIAAAAAAIAAKAAAACAAAI=</HashCode>
+      <FileName>core\Engine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ECSharp.core.Entity">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAEAAACARAQAAAAEAAAEQAgAAAAAAAA=</HashCode>
+      <FileName>core\Entity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ECSharp.core.Node" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAgAAAAIAgAAAAAAAAACAAAAAAAAAEAAEAAAAA=</HashCode>
+      <FileName>core\Node.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ECSharp.core.NodeManager" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAgAAAAQACAAACAAAACBAAAAAAAAAQAAAAACAQQCYAA=</HashCode>
+      <FileName>core\NodeManager.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ECSharp.core.Systeme" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACQAIAQAAAAAAAAAAgKAAAAAIAAAAAAEAAA=</HashCode>
+      <FileName>core\Systeme.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ECSharp.Properties.Resources">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ECSharp.Properties.Settings" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="ECSharp.core.IGrouping" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAACAAAAABAAAAAAAAAAAAAAAAAQACQAA=</HashCode>
+      <FileName>core\IGrouping.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
