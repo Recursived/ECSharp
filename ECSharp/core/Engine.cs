@@ -5,13 +5,19 @@ using System.Drawing;
 
 namespace ECSharp.core
 {
+    /// <summary>
+    /// The engine is the main part of the ECS system. It holds every system and entities.
+    /// It also holds sets of nodes.
+    /// </summary>
     public class Engine
     {
+        #region fields
         private LinkedList<Entity> entityList;
         private OrderedBag<Systeme> systemList;
         private Dictionary<string, Entity> entityDict;
         private Dictionary<string, IGrouping> groupings;
         public bool updating;
+        #endregion
 
         public Engine()
         {
@@ -22,6 +28,10 @@ namespace ECSharp.core
 
         }
 
+        /// <summary>
+        /// Adds an entity to the ECS model
+        /// </summary>
+        /// <param name="e">Entity</param>
         public void AddEntity(Entity e)
         {
             if (entityDict.ContainsKey(e.Name))
@@ -37,6 +47,10 @@ namespace ECSharp.core
             }
         }
 
+        /// <summary>
+        /// Removes an entity from the ecs system
+        /// </summary>
+        /// <param name="e">Entity</param>
         public void RemoveEntity(Entity e)
         {
             foreach (IGrouping g in groupings.Values)
@@ -47,15 +61,11 @@ namespace ECSharp.core
             entityList.Remove(e);
         }
 
-        private void EntityNameChanged(Entity e, string oldID)
-        {
-            if (entityDict.ContainsKey(oldID))
-            {
-                entityDict.Remove(oldID);
-                entityDict.Add(e.Name, e);
-            }
-        }
-
+        /// <summary>
+        /// Get the entity according to the name given by parameter
+        /// </summary>
+        /// <param name="entityID">string entity id</param>
+        /// <returns>Entity</returns>
         public Entity GetEntityByName(string entityID)
         {
             return entityDict[entityID];
@@ -74,22 +84,15 @@ namespace ECSharp.core
             return entityList;
         }
 
-        private void ComponentAdded(Entity e, string compId)
-        {
-            foreach (IGrouping g in groupings.Values)
-            {
-                g.ComponentAddedToEntity(e, compId);
-            }
-        }
 
-        private void ComponentRemoved(Entity e, string compId)
-        {
-            foreach (IGrouping g in groupings.Values)
-            {
-                g.ComponentRemovedFromEntity(e, compId);
-            }
-        }
 
+
+        /// <summary>
+        /// Get the list of node by checking if it is presents it the groupings. If not
+        /// the node manager has to fetch the set of nodes
+        /// </summary>
+        /// <param name="node">Node : type of node</param>
+        /// <returns>LinkedList<Node></returns>
         public LinkedList<Node> GetNodeList(Node node)
         {
             if (groupings.ContainsKey(node.ClassId))
@@ -114,6 +117,7 @@ namespace ECSharp.core
             }
             groupings.Remove(n.ClassId);
         }
+
 
         public void AddSystem(Systeme s, Systeme.Priority p)
         {
@@ -153,7 +157,11 @@ namespace ECSharp.core
             }
             systemList.Clear();
         }
-
+        /// <summary>
+        /// Updates every system in the engine
+        /// </summary>
+        /// <param name="time">float time</param>
+        /// <param name="g">if Graphics is different of null, the update is more of a draw</param>
         public void Update(float time, Graphics g)
         {
             updating = true;

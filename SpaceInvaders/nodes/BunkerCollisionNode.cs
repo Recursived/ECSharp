@@ -2,8 +2,6 @@
 using SpaceInvaders.components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.nodes
 {
@@ -15,7 +13,7 @@ namespace SpaceInvaders.nodes
 
         public BunkerCollisionNode() : base() { }
 
-        public BunkerCollisionNode(Entity e) : base(e) { } 
+        public BunkerCollisionNode(Entity e) : base(e) { }
         public override void DisposeNode()
         {
             bunker = null;

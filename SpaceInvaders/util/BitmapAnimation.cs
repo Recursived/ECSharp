@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Drawing;
 
 namespace SpaceInvaders.util
 {
@@ -26,7 +22,7 @@ namespace SpaceInvaders.util
             if (counter < frames.Length)
             {
                 return frames[counter++];
-            } 
+            }
             else
             {
                 return frames[frames.Length - 1];

@@ -2,8 +2,6 @@
 using SpaceInvaders.components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.nodes
 {
@@ -44,11 +42,13 @@ namespace SpaceInvaders.nodes
         {
             if (comp.ClassId == display.ClassId)
             {
-                display = (Display) comp;
-            } else if (comp.ClassId == pos.ClassId)
+                display = (Display)comp;
+            }
+            else if (comp.ClassId == pos.ClassId)
             {
-                pos = (Position) comp;
-            } else
+                pos = (Position)comp;
+            }
+            else
             {
                 throw new Exception("You passed a wrong component to the " + this.GetType().Name + " class");
             }

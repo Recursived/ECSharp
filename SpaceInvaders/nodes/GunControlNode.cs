@@ -2,8 +2,6 @@
 using SpaceInvaders.components;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SpaceInvaders.nodes
@@ -62,7 +60,8 @@ namespace SpaceInvaders.nodes
             else if (comp.ClassId == gunControl.ClassId)
             {
                 gunControl = (GunControl)comp;
-            } else if (comp.ClassId == display.ClassId)
+            }
+            else if (comp.ClassId == display.ClassId)
             {
                 display = (Display)comp;
             }

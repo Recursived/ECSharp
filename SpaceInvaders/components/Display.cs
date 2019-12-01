@@ -1,9 +1,5 @@
 ﻿using ECSharp.core;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.components
 {
@@ -24,7 +20,7 @@ namespace SpaceInvaders.components
 
         public Display(Display d) : this(d.rotation, d.bitmap) { }
 
-        
+
         public override Component CreateCopy()
         {
             return new Display(this);

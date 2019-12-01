@@ -1,9 +1,5 @@
 ﻿using ECSharp.core;
 using SpaceInvaders.util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.components
 {
@@ -16,7 +12,7 @@ namespace SpaceInvaders.components
 
         public Gun(float x, float y) : base()
         {
-            shootingPoint = new Vector2D(x,y);
+            shootingPoint = new Vector2D(x, y);
             shoot = true;
             doubleShoot = false;
             controllableShoot = false;

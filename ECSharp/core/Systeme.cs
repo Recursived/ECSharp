@@ -3,6 +3,14 @@ using System.Drawing;
 
 namespace ECSharp.core
 {
+    /// <summary>
+    ///  A system is the main part of the game. Systems should be added to the engine. The engine then updates systems by
+    ///  calling the update method.
+    ///  
+    /// The set of all systems constitutes the core functionality of a game. Each system update are part of the game loop.
+    /// Systems operate on collection of nodes
+    /// </summary>
+
     public abstract class Systeme : IComparable
     {
         public enum Priority : int
@@ -20,7 +28,7 @@ namespace ECSharp.core
         protected bool runnable;
         private string classId;
 
-        
+
 
         protected Systeme(Priority priority)
         {

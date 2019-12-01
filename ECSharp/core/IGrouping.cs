@@ -2,6 +2,9 @@
 
 namespace ECSharp.core
 {
+    /// <summary>
+    /// Interface for classes that should deal with groupings (elements with same characteristics)
+    /// </summary>
     interface IGrouping
     {
         LinkedList<Node> GetNodes();

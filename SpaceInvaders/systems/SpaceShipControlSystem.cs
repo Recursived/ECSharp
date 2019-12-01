@@ -1,10 +1,8 @@
 ﻿using ECSharp.core;
 using SpaceInvaders.nodes;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SpaceInvaders.systems
@@ -16,7 +14,7 @@ namespace SpaceInvaders.systems
 
         private readonly Node n = new SpaceShipControlNode();
         private readonly Node bulletnode = new BulletControlNode();
-        
+
         private HashSet<Keys> keyPool;
         Size size;
 
@@ -44,7 +42,7 @@ namespace SpaceInvaders.systems
         {
             if (runnable)
             {
-                
+
                 SpaceShipControlNode ssn = (SpaceShipControlNode)lst.First();
                 if (keyPool.Contains(ssn.control.left))
                 {
@@ -62,7 +60,7 @@ namespace SpaceInvaders.systems
                         ssn.pos.point.x += ssn.control.v.speedVect.x * time;
                     }
                 }
-                
+
 
                 // We control bullet if they can be controlled
                 foreach (Node bullet in lst_bullet)
@@ -76,30 +74,33 @@ namespace SpaceInvaders.systems
                             {
                                 bcn.vitesse.speedVect.y--;
                             }
-                            
-                        } else if (keyPool.Contains(Keys.S))
+
+                        }
+                        else if (keyPool.Contains(Keys.S))
                         {
-                            if(bcn.vitesse.speedVect.y < -1)
+                            if (bcn.vitesse.speedVect.y < -1)
                             {
                                 bcn.vitesse.speedVect.y++;
                             }
-                            
-                            
-                        } else if (keyPool.Contains(Keys.Q))
+
+
+                        }
+                        else if (keyPool.Contains(Keys.Q))
                         {
                             if (bcn.pos.point.x > 1)
                             {
                                 bcn.pos.point.x -= (float)0.3;
                             }
-                            
-                            
-                        } else if (keyPool.Contains(Keys.D))
+
+
+                        }
+                        else if (keyPool.Contains(Keys.D))
                         {
                             if (bcn.pos.point.x < size.Width - 1)
                             {
-                                bcn.pos.point.x += (float) 0.3;
+                                bcn.pos.point.x += (float)0.3;
                             }
-                            
+
 
                         }
                     }

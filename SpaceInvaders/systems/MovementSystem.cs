@@ -2,11 +2,9 @@
 using SpaceInvaders.components;
 using SpaceInvaders.nodes;
 using SpaceInvaders.util;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.systems
 {
@@ -78,7 +76,8 @@ namespace SpaceInvaders.systems
                     {
                         factory.removeEntity(mn.entity);
                         gunnode.gun.shoot = true;
-                    } else if (newv.y > size.Height)
+                    }
+                    else if (newv.y > size.Height)
                     {
                         factory.removeEntity(mn.entity);
                     }
@@ -94,7 +93,7 @@ namespace SpaceInvaders.systems
                 int compteur = 0;
                 foreach (Node enemies in lst_enemies)
                 {
-                    
+
                     EnemyNode en = (EnemyNode)enemies;
                     switch (eblocknode.block.direction)
                     {
@@ -108,13 +107,14 @@ namespace SpaceInvaders.systems
 
                     }
 
-                    if (eblocknode.block.collided ) {
+                    if (eblocknode.block.collided)
+                    {
                         if (time == 0)
                         {
                             time = (float)0.005; // In case the draw update happens at impact
                         }
                         en.pos.point.y += en.enemy.vitesse.y * time;
-                        en.enemy.vitesse.y += size.Width/10 + (gstatenode.gs.level * time);
+                        en.enemy.vitesse.y += size.Width / 10 + (gstatenode.gs.level * time);
                         en.enemy.vitesse.x += 3 * gstatenode.gs.level;
 
 

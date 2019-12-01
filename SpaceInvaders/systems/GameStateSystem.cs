@@ -1,10 +1,8 @@
 ﻿using ECSharp.core;
 using SpaceInvaders.nodes;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SpaceInvaders.systems
@@ -18,7 +16,7 @@ namespace SpaceInvaders.systems
         private readonly Node n = new GameStateNode();
         private LinkedList<Node> lst;
 
-        
+
 
         public GameStateSystem(Engine engine, HashSet<Keys> keyPool, EntityFactory ef, Size size) : base()
         {
@@ -41,8 +39,9 @@ namespace SpaceInvaders.systems
 
         public override void update(float time, Graphics g)
         {
-            GameStateNode gsn = (GameStateNode) lst.First();
-            if (runnable && gsn != null) {
+            GameStateNode gsn = (GameStateNode)lst.First();
+            if (runnable && gsn != null)
+            {
                 switch (gsn.gs.state)
                 {
                     case Game.State.Begin:
@@ -50,9 +49,9 @@ namespace SpaceInvaders.systems
                         if (g != null)
                         {
                             g.Flush();
-                            g.DrawImage(Properties.Resources.start, size.Width /3, size.Height / 4);
+                            g.DrawImage(Properties.Resources.start, size.Width / 3, size.Height / 4);
                         }
-                        
+
                         if (keyPool.Contains(Keys.S))
                         {
                             // We launch every system
@@ -109,11 +108,11 @@ namespace SpaceInvaders.systems
                                 );
 
                         }
-
                         if (gsn.gs.lives <= 0)
                         {
                             gsn.gs.state = Game.State.Lost;
-                        } else if (gsn.gs.enemiesCount == 0)
+                        }
+                        else if (gsn.gs.enemiesCount <= 0)
                         {
                             gsn.gs.state = Game.State.Win;
                         }
@@ -133,7 +132,7 @@ namespace SpaceInvaders.systems
                             g.DrawString("Press 'n' to go to the next level",
                                 Game.font,
                                 Game.blackBrush,
-                                size.Width/2,
+                                size.Width / 2,
                                 size.Height - 50
                                 );
                         }
@@ -153,7 +152,7 @@ namespace SpaceInvaders.systems
                         }
                         break;
                     case Game.State.Lost:
-                        
+
                         if (g != null)
                         {
                             g.DrawImage(Properties.Resources.game_over, size.Width / 4, size.Height / 4);
@@ -189,10 +188,10 @@ namespace SpaceInvaders.systems
                             }
                             gsn.gs.state = Game.State.Begin;
                         }
-                        
+
                         break;
-                    }
                 }
-            }          
+            }
+        }
     }
 }

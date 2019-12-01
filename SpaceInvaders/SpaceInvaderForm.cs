@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Diagnostics;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace SpaceInvaders
 {
@@ -14,7 +9,7 @@ namespace SpaceInvaders
     {
 
         private Game game;
-        
+
         Stopwatch watch = new Stopwatch();
         long lastTime = 0;
 
@@ -74,7 +69,7 @@ namespace SpaceInvaders
 
         private void SIForm_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void SIForm_KeyDown(object sender, KeyEventArgs e)

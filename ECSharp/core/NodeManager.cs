@@ -2,6 +2,10 @@
 
 namespace ECSharp.core
 {
+    /// <summary>
+    /// The node manager is a class that groups entities and comps according to the type of the node it has.
+    /// It checks the components in the nodes and filter entities according to those
+    /// </summary>
     class NodeManager : IGrouping
     {
         private Engine engine;
@@ -16,6 +20,11 @@ namespace ECSharp.core
             Init(engine, nodeType);
         }
 
+        /// <summary>
+        /// Initialize the node manager
+        /// </summary>
+        /// <param name="engine">Engine</param>
+        /// <param name="nodeType">Node</param>
         private void Init(Engine engine, Node nodeType)
         {
             this.engine = engine;
@@ -24,7 +33,7 @@ namespace ECSharp.core
             entities = new Dictionary<string, Node>();
             components = new Dictionary<string, Component>();
 
-//            nodeCache = new NodeCache(nodeType, components);
+            //            nodeCache = new NodeCache(nodeType, components);
 
             foreach (Component c in nodeType.getComponents())
             {
@@ -63,7 +72,10 @@ namespace ECSharp.core
 
 
 
-
+        /// <summary>
+        /// Adds entity according to the components in them
+        /// </summary>
+        /// <param name="e">Entity</param>
         private void AddIfMatch(Entity e)
         {
             if (!entities.ContainsKey(e.Name))
@@ -95,22 +107,12 @@ namespace ECSharp.core
                 Node n = entities[e.Name];
                 entities.Remove(e.Name);
                 nodes.Remove(n);
-                /*if (engine.updating)
-                {
-                    nodeCache.cache(n);
-                }
-                else
-                {
-                    nodeCache.dispose(n);
-                }*/
             }
         }
 
-        /*private void releaseNodeCache()
-        {
-            nodeCache.releaseCache();
-        }*/
-
+        /// <summary>
+        /// Clear nodes and entites of the node manager
+        /// </summary>
         public void Clean()
         {
             foreach (Node n in nodes)

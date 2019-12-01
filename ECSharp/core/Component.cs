@@ -28,6 +28,10 @@
             classId = c.classId;
         }
 
+        /// <summary>
+        ///  Create a copy of a component
+        /// </summary>
+        /// <returns>Component</returns>
         public abstract Component CreateCopy();
 
         public string ClassId => this.classId;

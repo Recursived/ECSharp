@@ -1,12 +1,10 @@
 ﻿using ECSharp.core;
 using SpaceInvaders.components;
 using SpaceInvaders.nodes;
-using SpaceInvaders.util;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.systems
 {
@@ -23,7 +21,7 @@ namespace SpaceInvaders.systems
         private readonly Node bonusnode = new BonusCollisionNode();
         private readonly Node blocknode = new EnemyBlockNode();
         //private readonly Node blocknode = new EnemyBlock();
-        
+
 
         private LinkedList<Node> lst_bunker;
         private LinkedList<Node> lst_bullet;
@@ -94,7 +92,7 @@ namespace SpaceInvaders.systems
                 GameStateNode gstatenode = null;
                 SpaceShipCollisionNode sscn = null;
                 EnemyBlockNode eblocknode = null;
-                
+
 
                 if (lst_gun.Count > 0) { gunctrlnode = (GunControlNode)lst_gun.First(); }
                 if (lst_game.Count > 0) { gstatenode = (GameStateNode)lst_game.First(); }
@@ -108,7 +106,7 @@ namespace SpaceInvaders.systems
                         BulletCollisionNode bullcn = (BulletCollisionNode)bullet;
                         BunkerCollisionNode bunkcn = (BunkerCollisionNode)bunker;
 
-                        
+
 
                         if (bunkcn.bunker.life > 0 &&
                             CheckRectangleCollision(bullcn.display, bullcn.pos, bunkcn.display, bunkcn.pos) &&
@@ -126,6 +124,7 @@ namespace SpaceInvaders.systems
                 #endregion
 
                 #region enemy bullet collision
+                gstatenode.gs.enemiesCount = lst_enemy.Count;
                 foreach (Node bullet in lst_bullet.ToList()) // to list to remove entity while looping
                 {
                     foreach (Node enemy in lst_enemy.ToList())
@@ -133,7 +132,7 @@ namespace SpaceInvaders.systems
                         BulletCollisionNode bullcn = (BulletCollisionNode)bullet;
                         EnemyNode en = (EnemyNode)enemy;
 
-                        
+
 
                         if (en.enemy.life > 0 &&
                             bullcn.bullet.ally &&
@@ -143,7 +142,6 @@ namespace SpaceInvaders.systems
                         {
                             ef.removeEntity(bullcn.entity);
                             en.enemy.life -= 1;
-                            gstatenode.gs.enemiesCount--;
                             if (en.enemy.life <= 0)
                             {
                                 if (gstatenode != null)
@@ -166,7 +164,7 @@ namespace SpaceInvaders.systems
                             pixel_destroyed = 0;
                             if (gunctrlnode != null) { gunctrlnode.gun.shoot = true; }
 
-                            if (Game.rand.Next(20) == 1 ) // Drop a bonus
+                            if (Game.rand.Next(20) == 1) // Drop a bonus
                             {
                                 Array values = Enum.GetValues(typeof(Bonus.Type));
                                 ef.CreateBonus(en.pos, (Bonus.Type)values.GetValue(Game.rand.Next(values.Length)));
@@ -183,7 +181,7 @@ namespace SpaceInvaders.systems
                     foreach (Node bullet in lst_bullet.ToList())
                     {
                         BulletCollisionNode bullcn = (BulletCollisionNode)bullet;
-                        
+
 
 
                         if (sscn.spaceship.life > 0 &&
@@ -211,7 +209,7 @@ namespace SpaceInvaders.systems
                         BulletCollisionNode en = (BulletCollisionNode)bull;
                         if (bullcn.entity.Name != en.entity.Name)
                         {
-                            
+
 
                             if (
                                 CheckRectangleCollision(bullcn.display, bullcn.pos, en.display, en.pos) &&
@@ -230,23 +228,23 @@ namespace SpaceInvaders.systems
                 #region spaceship bonus collision
                 if (lst_spaceship.Count > 0)
                 {
-                    
+
                     sscn = (SpaceShipCollisionNode)lst_spaceship.First();
                     foreach (Node bonus in lst_bonus.ToList())
                     {
                         BonusCollisionNode bonusn = (BonusCollisionNode)bonus;
-                        
-                        
+
+
 
                         if (sscn.spaceship.life > 0 &&
                             CheckRectangleCollision(bonusn.display, bonusn.pos, sscn.display, sscn.pos) &&
                             CheckPixelCollision(bonusn.display, bonusn.pos, sscn.display, sscn.pos)
                             )
                         {
-                            
+
                             switch (bonusn.bonus.type)
                             {
-                               
+
                                 case Bonus.Type.PlusLife:
                                     sscn.spaceship.life++;
                                     bonus_label = "+ 1 life";
@@ -272,7 +270,7 @@ namespace SpaceInvaders.systems
                                     bonus_label = "Enemies slowdown";
                                     break;
                                 case Bonus.Type.doubleShoot:
-                                    Gun gun = (Gun) sscn.entity.GetComponent("Gun");
+                                    Gun gun = (Gun)sscn.entity.GetComponent("Gun");
                                     gun.doubleShoot = true;
                                     bonus_label = "Double bullet";
                                     break;
@@ -290,7 +288,7 @@ namespace SpaceInvaders.systems
                         }
                     }
 
-                    if (g != null && compteur_label++ < 200)
+                    if (g != null && compteur_label++ < 1000)
                     {
                         g.DrawString(
                             bonus_label,
@@ -299,7 +297,8 @@ namespace SpaceInvaders.systems
                             size.Width - 130,
                             size.Height - 50
                         );
-                    } else if (g != null && compteur_label++ > 200)
+                    }
+                    else if (g != null && compteur_label++ > 200)
                     {
                         compteur_label = 0;
                         bonus_label = "";
@@ -314,7 +313,8 @@ namespace SpaceInvaders.systems
                     eblocknode.block.collided = true;
                     eblocknode.block.direction = EnemyBlock.Direction.Right;
                     eblocknode.block.shootProbability -= 10;
-                } else if (eblocknode.block.direction == EnemyBlock.Direction.Right && eblocknode.block.bottomRight.x >= size.Width)
+                }
+                else if (eblocknode.block.direction == EnemyBlock.Direction.Right && eblocknode.block.bottomRight.x >= size.Width)
                 {
                     eblocknode.block.collided = true;
                     eblocknode.block.direction = EnemyBlock.Direction.Left;
@@ -343,7 +343,7 @@ namespace SpaceInvaders.systems
 
 
         #region collision methods
-        private bool CheckRectangleCollision(Display d1, Position p1, Display d2, Position p2) 
+        private bool CheckRectangleCollision(Display d1, Position p1, Display d2, Position p2)
         {
             if (p1.point.x + d1.bitmap.Width >= p2.point.x &&
                 p1.point.x <= p2.point.x + d2.bitmap.Width &&
@@ -368,8 +368,8 @@ namespace SpaceInvaders.systems
             {
                 for (int x = (int)x1; x < x2; ++x)
                 {
-                    if (d1.bitmap.GetPixel((int)(x - p1.point.x),(int) (y - p1.point.y)) == Color.FromArgb(255, 0, 0, 0) &&
-                        d1.bitmap.GetPixel((int)(x - p1.point.x),(int) (y - p1.point.y)) ==
+                    if (d1.bitmap.GetPixel((int)(x - p1.point.x), (int)(y - p1.point.y)) == Color.FromArgb(255, 0, 0, 0) &&
+                        d1.bitmap.GetPixel((int)(x - p1.point.x), (int)(y - p1.point.y)) ==
                         d2.bitmap.GetPixel((int)(x - p2.point.x), (int)(y - p2.point.y)))
                     {
                         if (damage > 0) { DestroyPixel(d2, (int)(x - p2.point.x), (int)(y - p2.point.y), damage); }
@@ -383,22 +383,23 @@ namespace SpaceInvaders.systems
 
         private void DestroyPixel(Display d, int x, int y, int damage)
         {
-                d.bitmap.SetPixel(x, y, Color.FromArgb(0, 255, 255, 255));
-                for (int i = -damage*4; i < damage*4; i++)
+            d.bitmap.SetPixel(x, y, Color.FromArgb(0, 255, 255, 255));
+            for (int i = -damage * 4; i < damage * 4; i++)
+            {
+                for (int j = -damage * 4; j < damage * 4; j++)
                 {
-                    for (int j = -damage*4; j < damage*4; j++)
+                    if (Math.Abs(i) + Math.Abs(j) < 4)
                     {
-                        if (Math.Abs(i) + Math.Abs(j) < 4)
+                        if (x + i >= 0 && x + i < d.bitmap.Width && y + j >= 0 && y + j < d.bitmap.Height)
                         {
-                            if (  x + i >= 0 && x + i < d.bitmap.Width && y + j>= 0 && y + j < d.bitmap.Height) { 
-                                d.bitmap.SetPixel(x + i, y + j, Color.FromArgb(0, 255, 255, 255));
-                                pixel_destroyed++;
-                            }
-                            
+                            d.bitmap.SetPixel(x + i, y + j, Color.FromArgb(0, 255, 255, 255));
+                            pixel_destroyed++;
                         }
-                        
+
                     }
+
                 }
+            }
 
         }
         #endregion

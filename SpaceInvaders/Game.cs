@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Drawing;
-using System.Diagnostics;
-using System.Windows.Forms;
-using ECSharp.core;
+﻿using ECSharp.core;
 using SpaceInvaders.systems;
-using System.Windows.Media;
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace SpaceInvaders
 {
@@ -59,7 +55,7 @@ namespace SpaceInvaders
             e.GetSystem("GameStateSystem").Start();
 
             factory.CreateGameEntity();
-            
+
 
 
         }

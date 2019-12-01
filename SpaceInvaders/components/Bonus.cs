@@ -1,8 +1,4 @@
 ﻿using ECSharp.core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.components
 {
@@ -18,7 +14,7 @@ namespace SpaceInvaders.components
             controlledBullet
 
 
-        } 
+        }
 
         public Type type;
 

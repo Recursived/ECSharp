@@ -1,11 +1,8 @@
 ﻿using ECSharp.core;
 using SpaceInvaders.components;
 using SpaceInvaders.util;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SpaceInvaders
@@ -14,7 +11,7 @@ namespace SpaceInvaders
     {
 
         private Engine e;
-        private Dictionary<string,int> cachePixel = new Dictionary<string, int>();
+        private Dictionary<string, int> cachePixel = new Dictionary<string, int>();
 
         public EntityFactory(Engine e)
         {
@@ -74,7 +71,8 @@ namespace SpaceInvaders
                 e.AddEntity(b2);
                 lst.Add(b2);
 
-            } else
+            }
+            else
             {
                 Entity entity = new Entity();
                 entity.AddComponent(new Bullet(1, true, g.controllableShoot))
@@ -84,7 +82,7 @@ namespace SpaceInvaders
                 e.AddEntity(entity);
                 lst.Add(entity);
             }
-            
+
             if (g.controllableShoot)
             {
                 g.controllableShoot = false; // we reset bonus when shot
@@ -119,7 +117,7 @@ namespace SpaceInvaders
         public List<Entity> CreateEnemyEntities(Size s, GameState gs)
         {
             List<Entity> entities = new List<Entity>();
-            Bitmap[] arr_bitmap = 
+            Bitmap[] arr_bitmap =
             {
                 Properties.Resources.ship1,
                 Properties.Resources.ship2,
@@ -145,7 +143,7 @@ namespace SpaceInvaders
                 for (int j = 0; j < 7; j++)
                 {
                     Entity ent = new Entity();
-                    Position p = new Position((s.Width / 20) * (2*j), (s.Height / 17) * i);
+                    Position p = new Position((s.Width / 20) * (2 * j), (s.Height / 17) * i);
                     // We check the furthest x and y pos for the enemy block
                     if (max_x < p.point.x + arr_bitmap[i].Width)
                     {
@@ -188,13 +186,13 @@ namespace SpaceInvaders
             Entity b1 = new Entity();
             Entity b2 = new Entity();
             Entity b3 = new Entity();
-            b1.AddComponent(new Position((s.Width / 7), (int) (s.Height * 0.7)))
+            b1.AddComponent(new Position((s.Width / 7), (int)(s.Height * 0.7)))
                 .AddComponent(new Display(Properties.Resources.bunker))
                 .AddComponent(new Bunker(GetLifeFromPixel(Properties.Resources.bunker, "bunker")));
-            b2.AddComponent(new Position((s.Width / 7)*3, (int)(s.Height * 0.7)))
+            b2.AddComponent(new Position((s.Width / 7) * 3, (int)(s.Height * 0.7)))
                .AddComponent(new Display(Properties.Resources.bunker))
                .AddComponent(new Bunker(GetLifeFromPixel(Properties.Resources.bunker, "bunker")));
-            b3.AddComponent(new Position((s.Width / 7)*5, (int)(s.Height * 0.7)))
+            b3.AddComponent(new Position((s.Width / 7) * 5, (int)(s.Height * 0.7)))
                .AddComponent(new Display(Properties.Resources.bunker))
                .AddComponent(new Bunker(GetLifeFromPixel(Properties.Resources.bunker, "bunker")));
             e.AddEntity(b1);
@@ -209,13 +207,13 @@ namespace SpaceInvaders
 
         private int GetLifeFromPixel(Bitmap b, string entityname)
         {
-            
+
             if (!cachePixel.ContainsKey(entityname))
             {
                 int black_pixels = CountPixels(b, Color.FromArgb(255, 0, 0, 0));
                 cachePixel.Add(entityname, black_pixels);
                 return black_pixels;
-            } 
+            }
             else
             {
                 return cachePixel[entityname];
@@ -224,7 +222,7 @@ namespace SpaceInvaders
 
         private int CountPixels(Bitmap bm, Color target_color)
         {
-            
+
             int matches = 0;
             for (int y = 0; y < bm.Height; y++)
             {

@@ -1,5 +1,4 @@
 ﻿using ECSharp.core;
-using SpaceInvaders.components;
 using SpaceInvaders.nodes;
 using System.Collections.Generic;
 using System.Drawing;
@@ -37,7 +36,7 @@ namespace SpaceInvaders.systems
 
                 }
             }
-            
+
         }
 
         private void Draw(RenderNode rn, Graphics graphics)
@@ -45,5 +44,5 @@ namespace SpaceInvaders.systems
             graphics.DrawImage(rn.display.bitmap, rn.pos.point.x, rn.pos.point.y);
         }
 
-}
+    }
 }

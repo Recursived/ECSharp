@@ -1,8 +1,4 @@
 ﻿using ECSharp.core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace SpaceInvaders.components
 {
@@ -15,7 +11,7 @@ namespace SpaceInvaders.components
             this.life = life;
         }
 
-        public SpaceShip() : this(0) {}
+        public SpaceShip() : this(0) { }
 
         public SpaceShip(SpaceShip s) : this(s.life) { }
 

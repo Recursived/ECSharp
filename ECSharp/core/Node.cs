@@ -4,7 +4,8 @@ namespace ECSharp.core
 {
     /// <summary>
     /// A node is a set of different of components.
-    /// Nodes can be required by a system
+    /// They should contain the components and entities they act on.
+    /// They act as a sort of filter for components
     /// </summary>
     public abstract class Node
     {
@@ -39,10 +40,22 @@ namespace ECSharp.core
         /// </summary>
         public abstract void DisposeNode();
 
+        /// <summary>
+        /// Sets up the component of a node
+        /// </summary>
+        /// <param name="comp">Component</param>
         public abstract void SetComponent(Component comp);
 
+        /// <summary>
+        /// Sets up components of a node with dummy values
+        /// </summary>
         public abstract void SetUp();
 
+        /// <summary>
+        /// Make a copy of the current node by passing reference of components
+        /// </summary>
+        /// <param name="e">Entity</param>
+        /// <returns>Node</returns>
         public abstract Node makeCopy(Entity e);
     }
 }

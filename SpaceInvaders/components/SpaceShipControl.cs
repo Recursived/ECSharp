@@ -1,8 +1,4 @@
 ﻿using ECSharp.core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SpaceInvaders.components
@@ -19,7 +15,7 @@ namespace SpaceInvaders.components
             this.v = v;
         }
 
-        public SpaceShipControl(SpaceShipControl ssc) : this(ssc.left, ssc.right, ssc.v) { } 
+        public SpaceShipControl(SpaceShipControl ssc) : this(ssc.left, ssc.right, ssc.v) { }
 
         public override Component CreateCopy()
         {

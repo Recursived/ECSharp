@@ -2,11 +2,9 @@
 using SpaceInvaders.components;
 using SpaceInvaders.nodes;
 using SpaceInvaders.util;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace SpaceInvaders.systems
@@ -56,7 +54,7 @@ namespace SpaceInvaders.systems
             lst_block = null;
             lst_game = null;
         }
-        
+
 
         public override void update(float time, Graphics g)
         {
@@ -77,9 +75,10 @@ namespace SpaceInvaders.systems
                         if (gcn.gun.doubleShoot && timer_bonus < 5)
                         {
                             timer_bonus++;
-                        } else
+                        }
+                        else
                         {
-                            
+
                             timer_bonus = 0;
                             gcn.gun.doubleShoot = false;
                         }
@@ -99,31 +98,35 @@ namespace SpaceInvaders.systems
                 }
 
                 // we see if we shoot anything, if so we choose a random enemy to do so
-                if (Game.rand.Next(ben.block.shootProbability) <= gsn.gs.level*2)
+                if (Game.rand.Next(ben.block.shootProbability) <= gsn.gs.level * 2)
                 {
                     int index = Game.rand.Next(lst_enemies.Count);
-                    EnemyNode en = (EnemyNode)lst_enemies.ToList()[index];
-                    int damage = 0;
-                    Bitmap b = null;
-                    switch (en.enemy.type)
+                    if (lst_enemies.Count > 0)
                     {
-                        case Enemy.Type.Big:
-                            b = Properties.Resources.shoot4;
-                            damage = 3 + gsn.gs.level;
-                            break;
-                        case Enemy.Type.Medium:
-                            damage = 2 + gsn.gs.level;
-                            b = Properties.Resources.shoot3;
-                            break;
-                        case Enemy.Type.Small:
-                            b = Properties.Resources.shoot2;
-                            damage = 1 + gsn.gs.level;
-                            break;
+                        EnemyNode en = (EnemyNode)lst_enemies.ToList()[index];
+                        int damage = 0;
+                        Bitmap b = null;
+                        switch (en.enemy.type)
+                        {
+                            case Enemy.Type.Big:
+                                b = Properties.Resources.shoot4;
+                                damage = 3 + gsn.gs.level;
+                                break;
+                            case Enemy.Type.Medium:
+                                damage = 2 + gsn.gs.level;
+                                b = Properties.Resources.shoot3;
+                                break;
+                            case Enemy.Type.Small:
+                                b = Properties.Resources.shoot2;
+                                damage = 1 + gsn.gs.level;
+                                break;
+                        }
+                        ef.CreateEnemyBullet(en.gun, b, damage);
                     }
-                    ef.CreateEnemyBullet(en.gun, b, damage);
+
                 }
             }
-            
+
         }
     }
 }
