@@ -11,11 +11,17 @@ namespace SpaceInvaders
         [STAThread]
         static void Main()
         {
+            try
+            {
+                SpaceInvaderForm form = new SpaceInvaderForm();
+                Application.EnableVisualStyles();
+                Application.Run(form);
+                Application.SetCompatibleTextRenderingDefault(false);
+            } catch(Exception e)
+            {
 
-            SpaceInvaderForm form = new SpaceInvaderForm();
-            Application.EnableVisualStyles();
-            Application.Run(form);
-            Application.SetCompatibleTextRenderingDefault(false);
+            }
+            
 
 
         }
