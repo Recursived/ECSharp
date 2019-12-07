@@ -114,10 +114,11 @@ namespace SpaceInvaders.systems
                             )
                         {
                             CheckPixelCollision(bullcn.display, bullcn.pos, bunkcn.display, bunkcn.pos, bullcn.bullet.damage);
-                            ef.removeEntity(bullcn.entity);
+                            
                             bunkcn.bunker.life -= pixel_destroyed;
                             pixel_destroyed = 0;
-                            if (gunctrlnode != null) { gunctrlnode.gun.shoot = true; }
+                            if (gunctrlnode != null && bullcn.bullet.ally) { gunctrlnode.gun.shoot = true; }
+                            ef.removeEntity(bullcn.entity);
                         }
                     }
                 }
